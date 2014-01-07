@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bms.uaa.admin.persistence.UserMapper">
+
+	<insert id="insertUser" parameterType="User">
+		INSERT INTO uaa_user
+		(username, password, email, mobile, creator, create_time, user_enable, user_status)
+		VALUES
+		(#{username}, #{password}, #{email}, #{mobile}, #{creator}, #{create_time}, #{user_enable}, #{user_status})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="account_id">
+			SELECT LAST_INSERT_ID() AS user_id
+		</selectKey>
+	</insert>
+
+	<update id="updateUser" parameterType="User">
+		UPDATE uaa_user
+		<set>
+			<if test="username != null">username = #{username},</if>
+			<if test="password != null">password = #{password},</if>
+			<if test="email != null">email = #{email},</if>
+			<if test="mobile != null">mobile = #{mobile},</if>
+			<if test="creator != null">creator = #{creator},</if>
+			<if test="create_time != null">create_time = #{create_time},</if>
+			<if test="user_enable != null">user_enable = #{user_enable},</if>
+			<if test="user_status != null">user_status = #{user_status},</if>
+			<if test="last_login_time != null">last_login_time = #{last_login_time},</if>
+			<if test="last_login_addr != null">last_login_addr = #{last_login_addr},</if>
+		</set>
+		WHERE user_id = #{user_id}
+	</update>
+
+	<delete id="deleteUser" parameterType="Integer">
+		DELETE FROM uaa_user WHERE user_id = #{user_id}
+	</delete>
+
+	<select id="queryUser" parameterType="Integer" resultType="User">
+		SELECT * FROM uaa_user WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="queryUsers" parameterType="java.util.Map" resultType="User">
+		SELECT * FROM uaa_user
+		<where>
+			<if test="username != null">AND username LIKE '%${username}%'</if>
+			<if test="user_enable != null">AND user_enable = #{user_enable}</if>
+			<if test="user_status != null">AND user_status = #{user_status}</if>
+		</where>
+		ORDER BY username ASC
+	</select>
+
+</mapper>
