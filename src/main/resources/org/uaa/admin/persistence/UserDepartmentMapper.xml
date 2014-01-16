@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.UserDepartmentMapper">
+
+	<insert id="insertUserDepartment" parameterType="UserDepartment">
+		INSERT INTO uaa_userDepartment
+		(user_id, dep_id)
+		VALUES
+		(#{user_id}, #{dep_id})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteUserDepartments" parameterType="java.util.Map">
+		DELETE FROM uaa_userDepartment WHERE user_id=#{user_id}
+	</delete>
+
+	<select id="queryUserDepartments" parameterType="java.util.Map" resultType="UserDepartment">
+		SELECT * FROM uaa_userDepartment WHERE user_id=#{user_id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.security.persistence.SecurityMapper">
+
+	<select id="queryPublicResources" resultType="Resource">
+		SELECT * FROM uaa_resource WHERE res_type='public'
+	</select>
+
+	<select id="queryNonPublicResources" resultType="Resource">
+		SELECT * FROM uaa_resource WHERE res_type!='public'
+	</select>
+
+	<select id="queryNeededRoles" parameterType="java.util.Map"
+		resultType="Integer">
+		SELECT role.role_id
+		FROM uaa_role role,
+		uaa_resource res,
+		uaa_authority auth,
+		uaa_roleAuthority roleAuth,
+		uaa_authorityResource authRes
+		WHERE role.role_id=roleAuth.role_id
+		and roleAuth.auth_id=auth.auth_id
+		and auth.auth_id=authRes.auth_id
+		and authRes.res_id=res.res_id
+		and res.res_uri=#{res_uri}
+		and res.res_action=#{res_action}
+	</select>
+
+	<select id="queryUserByUsername" parameterType="java.util.Map"
+		resultType="User">
+		SELECT user_id, username, password
+		FROM uaa_user
+		WHERE
+		username=#{username}
+	</select>
+
+	<select id="queryUserRoles" parameterType="java.util.Map"
+		resultType="Integer">
+		SELECT ar.role_id
+		FROM uaa_userRole ar
+		WHERE
+		ar.user_id=#{user_id}
+	</select>
+
+	<update id="updateLastLoginInfo" parameterType="java.util.Map">
+		UPDATE uaa_user
+		SET
+		last_login_time=#{last_login_time},
+		last_login_addr=#{last_login_addr}
+		WHERE username=#{username}
+	</update>
+
+</mapper>

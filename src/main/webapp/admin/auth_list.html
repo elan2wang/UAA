@@ -1,0 +1,139 @@
+<script src="scripts/admin/auth_list.js" type="text/javascript"></script>
+<div class="tab-pane active">
+	<form class="form-horizontal" onsubmit="return false;">
+		<fieldset>
+			<legend>系统权限维护</legend>
+			<div class="control-group">
+				<div class="controls1">
+					<a class="config" href="#auth_add_panel" data-toggle="modal">
+						<button id="btn_auth_add" class="btn btn-success" type="button">
+							<i class="icon-thumbs-up"></i> 新增权限 <i class="icon-plus"></i>
+						</button>
+					</a>
+				</div>
+				<div class="controls1">
+					<select id="filter_auth_enable" class="input-small">
+						<option value="">所有状态</option>
+						<option value="true">已启用</option>
+						<option value="false">已禁用</option>
+					</select> <select id="filter_auth_type" class="input-small">
+						<option value="">所有类型</option>
+						<option value="sysadmin">sysadmin</option>
+						<option value="business">business</option>
+					</select> <input type="text" class="input-small" placeholder="权限名"
+						id="filter_auth_name">
+					<button type="submit" class="btn btn-success" id="btn_auth_filter">
+						<i class="icon-filter"></i> 筛选
+					</button>
+				</div>
+			</div>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>权限名</th>
+						<th>类型</th>
+						<th>描述</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="auth_list">
+					<!-- AUTH APPEND HERE -->
+				</tbody>
+			</table>
+			<div class="pagination" id="pagination"></div>
+		</fieldset>
+	</form>
+</div>
+
+<!-- POPUP BOX FOR ADD AND EDIT AUTHORITY BEGIN-->
+<div id="auth_add_panel" class="modal hide" style="width: 350px">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button"></button>
+		<h5>权限详情</h5>
+	</div>
+	<div class="modal-body">
+		<div class="control-group hide">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">权限编号</label> <input
+					id="auth_id" name="auth_id" class="input-middle" type="text"
+					size="16" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">权 &nbsp;限
+					&nbsp;名</label> <input id="auth_name" name="auth_name" class="input-middle"
+					type="text" size="16" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">权限类型</label> <select
+					id="auth_type" name="auth_type" class="input-lar">
+					<option value="business">business</option>
+					<option value="sysadmin">sysadmin</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">权限描述</label> <input
+					id="auth_description" name="auth_description" class="input-middle"
+					type="text" size="16" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">所属模块</label> <select
+					id="mod_id" name="mod_id" class="input-lar">
+					<option value="sysadmin">角色管理</option>
+				</select>
+			</div>
+		</div>
+		<hr class="line">
+		<button type="reset" class="btn purple offset1">重置</button>
+		<button id="btn_auth_add_submit" type="submit" class="btn btn-success">保存</button>
+		<button id="btn_auth_edit_submit" type="submit"
+			class="btn btn-success">修改</button>
+	</div>
+</div>
+<!-- POPUP BOX FOR ADD AND EDIT AUTHORITY END-->
+
+<!-- POPUP BOX FOR ASSIGN RESOURCE BEGIN-->
+<div id="assgin_res_panel" class="modal hide" style="width: 720px">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button"></button>
+		<h5 id="modal_header">资源列表</h5>
+	</div>
+	<div class="modal-body">
+		<div class="page-sidebar nav-collapse collapse" style="width: 320px">
+			<div>
+				<strong>已选择资源</strong>
+			</div>
+			<hr class="line">
+			<div id="selected_res_list" class="clearfix">
+				<!-- AUTHORITIES APPEND HERE -->
+			</div>
+			<hr class="line">
+			<button id="btn_assign_res_submit" type="submit"
+				class="btn btn-success">分配</button>
+		</div>
+		<div class="page-check border-task1" style="width: 320px">
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right"><strong>可选择资源</strong></label>
+					<select id="modules" style="width: 130px; margin-bottom: 0px" onchange="mod_change(this)">
+						<!-- MODULES APPEND HERE -->
+					</select>
+				</div>
+			</div>
+			<hr class="line">
+			<div id="res_list" class="clearfix">
+				<!-- AUTHORITIES APPEND HERE -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- POPUP BOX FOR ASSIGN RESOURCE END -->

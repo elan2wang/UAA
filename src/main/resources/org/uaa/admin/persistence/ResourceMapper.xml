@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.ResourceMapper">
+
+	<insert id="insertResource" parameterType="Resource">
+		INSERT INTO uaa_resource
+		(res_uri, mod_id, res_type, res_action, res_description, res_enable)
+		VALUES
+		(#{res_uri}, #{mod_id}, #{res_type}, #{res_action}, #{res_description}, #{res_enable})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="res_id">
+			SELECT LAST_INSERT_ID() AS res_id
+		</selectKey>
+	</insert>
+
+	<update id="updateResource" parameterType="Resource">
+		UPDATE uaa_resource
+		<set>
+			<if test="res_uri != null">res_uri = #{res_uri},</if>
+			<if test="mod_id != null">mod_id = #{mod_id},</if>
+			<if test="res_type != null">res_type = #{res_type},</if>
+			<if test="res_action != null">res_action = #{res_action},</if>
+			<if test="res_description != null">res_description = #{res_description},</if>
+			<if test="res_enable != null">res_enable = #{res_enable}</if>
+		</set>
+		WHERE res_id = #{res_id}
+	</update>
+
+	<delete id="deleteResource" parameterType="Integer">
+		DELETE FROM uaa_resource WHERE res_id = #{res_id}
+	</delete>
+
+	<select id="queryResource" parameterType="java.util.Map" resultType="Resource">
+		SELECT * FROM uaa_resource
+		<where>
+			<if test="res_id != null">res_id = #{res_id}</if>
+		</where>
+	</select>
+
+	<select id="queryResources" parameterType="java.util.Map" resultType="Resource">
+		SELECT * FROM uaa_resource
+		<where>
+			<if test="mod_id != null">AND mod_id = #{mod_id}</if>
+			<if test="res_type != null">AND res_type = #{res_type}</if>
+			<if test="res_type != null">AND res_action = #{res_action}</if>
+			<if test="res_uri != null">AND res_uri LIKE '%${res_uri}%'</if>
+			<if test="res_enable != null">AND res_enable = #{res_enable}</if>
+		</where>
+		ORDER BY mod_id ASC, res_uri ASC
+	</select>
+
+</mapper>

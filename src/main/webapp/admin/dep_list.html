@@ -1,0 +1,114 @@
+<script src="scripts/admin/dep_list.js" type="text/javascript"></script>
+<div class="tab-pane active">
+	<form class="form-horizontal" id="department_detail_form" onsubmit="return false;">
+		<fieldset>
+			<legend>部门信息维护</legend>
+			<div class="control-group">
+				<div class="controls1">
+					<a class="config" href="#department_add_panel" data-toggle="modal">
+						<button id="btn_department_add" name="btn_department_add"
+							class="btn btn-success" type="submit">
+							<i class="icon-star"> </i>新增部门 <i class="icon-plus"></i>
+						</button>
+					</a>
+				</div>
+				<div class="controls1">
+					<label class="fl mr10"></label> <select id="filter_dep_level"
+						class="input-small">
+						<option value="">所有等级</option>
+						<option value="0">0级</option>
+						<option value="1">1级</option>
+						<option value="2">2级</option>
+						<option value="3">3级</option>
+					</select>
+					<input type="text" class="input-small" placeholder="部门名称" id="filter_dep_name">
+					<button type="submit" class="btn btn-success" id="btn_department_filter" name="btn_department_filter">
+						<i class="icon-filter"></i> 筛选
+					</button>
+				</div>
+			</div>
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th width="10%">#</th>
+							<th width="25%">部门名称</th>
+							<th width="10%">等级</th>
+							<th width="40%">地址</th>
+							<th width="15%">操作</th>
+						</tr>
+					</thead>
+					<tbody id="department_list">
+						<!-- DEPARTMENT LIST APPEND HERE -->
+					</tbody>
+				</table>
+			<div class="pagination" id="pagination"></div>
+		</fieldset>
+		<div id="department_info_panel" class="modal hide" style="width: 360px">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button"></button>
+		<h5>部门详情</h5>
+	</div>
+	<div class="modal-body">
+		<div class="control-group hide">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">部门编号</label> 
+				<input id="dep_id" name="dep_id"
+					class="input-middle" type="text" size="16" value=""/>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">部门名称</label> 
+				<input id="dep_name" name="dep_name"
+					class="input-middle" type="text" size="16" value=""/>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">部门地址</label> 
+				<input id="address" name="address" class="input-middle"
+					type="text" size="16" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">部门等级</label> 
+				<select id="dep_level" name="dep_level" class="input-lar">
+					<option value="0">0级</option>
+					<option value="1">1级</option>
+					<option value="2">2级</option>
+					<option value="3">3级</option>
+				</select>
+			</div>
+		</div>
+		<hr class="line">
+			
+		
+		<button id="btn_department_add_submit" type="submit" class="btn btn-success offset2">保存</button>
+		<button id="btn_reset" type="submit" class="btn purple ">重置</button>
+		<button id="btn_cancel_update" type="submit"  class="btn purple offset1">取消修改</button>
+		<button id="btn_department_edit_submit" type="submit" class="btn btn-success">保存修改</button>
+	</div>
+	
+	
+</div>
+	</form>
+	
+</div>
+
+<!-- POPUP BOX FOR ADD, EDIT AND ASSIGN VAULTS -->
+<div id="department_vault_assign_panel" style="width:300px" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button"></button>
+		<h5 id="department_vault_assign_panel_header">分配账户</h5>
+	</div>
+	<div class="modal-body">
+		<div class="page-check1 border-task1">
+			<h5>选择账户</h5>
+			<div id="vault_list" class="clearfix">
+				<!-- CURRENT AND AVAILABLE VAULTS APPEND HERE -->
+			</div>
+			<button type="submit" class="btn btn-success" id="btn_save_dep_vault">保存</button>
+		</div>
+	</div>
+</div>

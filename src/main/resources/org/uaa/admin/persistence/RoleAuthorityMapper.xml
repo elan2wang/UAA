@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.RoleAuthorityMapper">
+
+	<insert id="insertRoleAuthority" parameterType="RoleAuthority">
+		INSERT INTO uaa_roleAuthority
+		(role_id, auth_id)
+		VALUES
+		(#{role_id}, #{auth_id})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteRoleAuthorities" parameterType="java.util.Map">
+		DELETE FROM uaa_roleAuthority
+		WHERE role_id = #{role_id}
+			<if test="mod_id != null">
+				AND auth_id in (SELECT auth_id FROM uaa_authority WHERE mod_id = #{mod_id})
+			</if>
+	</delete>
+
+	<select id="queryRoleAuthorities" parameterType="java.util.Map" resultType="RoleAuthority">
+		SELECT id, role_id, roleAuth.auth_id
+		FROM 
+			uaa_roleAuthority roleAuth, uaa_authority auth
+		WHERE
+			roleAuth.auth_id = auth.auth_id
+			AND roleAuth.role_id = #{role_id}
+			<if test="mod_id != null">AND auth.mod_id = #{mod_id}</if>
+	</select>
+	
+</mapper>

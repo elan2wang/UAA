@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.AuthorityMapper">
+	<insert id="insertAuthority" parameterType="Authority">
+		INSERT INTO uaa_authority
+		(auth_name, mod_id, auth_type, auth_description, auth_enable)
+		VALUES
+		(#{auth_name}, #{mod_id}, #{auth_type}, #{auth_description}, #{auth_enable})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="auth_id">
+			SELECT LAST_INSERT_ID() AS auth_id
+		</selectKey>
+	</insert>
+
+	<update id="updateAuthority" parameterType="Authority">
+		UPDATE uaa_authority
+		<set>
+			<if test="auth_name != null">auth_name = #{auth_name},</if>
+			<if test="mod_id != null">mod_id = #{mod_id},</if>
+			<if test="auth_type != null">auth_type = #{auth_type},</if>
+			<if test="auth_description != null">auth_description = #{auth_description},</if>
+			<if test="auth_enable != null">auth_enable = #{auth_enable}</if>
+		</set>
+		WHERE auth_id = #{auth_id}
+	</update>
+
+	<delete id="deleteAuthority" parameterType="Integer">
+		DELETE FROM uaa_authority WHERE auth_id = #{auth_id}
+	</delete>
+
+	<select id="queryAuthority" parameterType="java.util.Map" resultType="Authority">
+		SELECT * FROM uaa_authority
+		<where>
+			<if test="auth_id != null">auth_id = #{auth_id}</if>
+		</where>
+	</select>
+
+	<select id="queryAuthorities" parameterType="java.util.Map" resultType="Authority">
+		SELECT * FROM uaa_authority
+		<where>
+			<if test="auth_enable != null">AND auth_enable = #{auth_enable}</if>
+			<if test="mod_id != null">AND mod_id = #{mod_id}</if>
+			<if test="auth_name != null">AND auth_name LIKE '%${auth_name}%'</if>
+			<if test="auth_type != null">AND auth_type = #{auth_type}</if>
+		</where>
+		ORDER BY mod_id ASC, auth_name ASC
+	</select>
+
+</mapper>

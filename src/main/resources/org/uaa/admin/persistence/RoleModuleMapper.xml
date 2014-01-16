@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.RoleModuleMapper">
+
+	<insert id="insertRoleModule" parameterType="RoleModule">
+		INSERT INTO uaa_roleModule
+		(role_id, mod_id)
+		VALUES
+		(#{role_id}, #{mod_id})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteRoleModules" parameterType="java.util.Map">
+		DELETE FROM uaa_roleModule WHERE role_id=#{role_id}
+		<if test="mod_id != null">AND mod_id=#{mod_id}</if>
+	</delete>
+
+	<select id="queryRoleModules" parameterType="java.util.Map" resultType="RoleModule">
+		SELECT * FROM uaa_roleModule WHERE role_id=#{role_id}
+	</select>
+	
+	<select id="queryRoleModule" parameterType="java.util.Map" resultType="RoleModule">
+		SELECT * FROM uaa_roleModule WHERE role_id=#{role_id} AND mod_id=#{mod_id}
+	</select>
+	
+	<select id="queryRoleModulesByFather" parameterType="java.util.Map" resultType="RoleModule">
+		SELECT * FROM uaa_roleModule 
+		WHERE 
+			mod_id IN (SELECT mod_id FROM uaa_module WHERE father_mod = #{father_mod})
+			AND role_id = #{role_id}
+	</select>
+	
+</mapper>

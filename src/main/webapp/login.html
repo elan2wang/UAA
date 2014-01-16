@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign In | UAAS </title>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	
+<script type="text/javascript" src="scripts/libs/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="scripts/libs/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="scripts/libs/md5.js"></script>
+<script type="text/javascript" src="scripts/common/public.js"></script>
+<script type="text/javascript" src="scripts/common/verification.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+<style type="text/css">
+/*隐藏弹框的标题和关闭按钮*/
+.hide-dialog-title .ui-dialog-titlebar-close {
+	display: none;
+}
+
+.hide-dialog-title .ui-dialog-titlebar {
+	display: none;
+}
+</style>
+
+</head>
+<body class="login">
+	<div class="logo">
+		<img src="images/felice-logo1.png" />
+	</div>
+	<div class="content">
+		<div id="waiting_login" class="hide"></div>
+		<!-- BEGIN LOGIN FORM -->
+		<form class="form-vertical login-form" onsubmit="return false;"
+			novalidate="novalidate">
+			<h3 class="form-title">Sign In to UAAS</h3>
+			<div class="alert alert-error hide res_msg">
+				<button class="close" data-dismiss="alert"></button>
+				<span></span>
+			</div>
+			<div class="control-group username_group">
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-user"></i> <input class="m-wrap placeholder-no-fix"
+							type="text" placeholder="Username" id="username" name="username"
+							onfocus="removeErrorTip('username')" />
+					</div>
+					<label id="username_help"
+						class="help-inline help-small no-left-padding" for="username"></label>
+				</div>
+			</div>
+			<div class="control-group password_group">
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-lock"></i> <input class="m-wrap placeholder-no-fix"
+							type="password" placeholder="Password" id="password" name="password"
+							onfocus="removeErrorTip('password')" />
+					</div>
+					<label id="password_help"
+						class="help-inline help-small no-left-padding" for="password"></label>
+				</div>
+			</div>
+			<div class="form-actions">
+				<label class="checkbox"> <input type="checkbox"
+					name="remember" value="1" /> Remember Me
+				</label>
+				<button type="submit" class="btn btn-success pull-right"
+					onclick="goLogin();return false;">
+					Sign In <i class="m-icon-swapright m-icon-white"></i>
+				</button>
+			</div>
+		</form>
+	</div>
+	
+	<!-- FOTTER BEGIN -->
+	<footer class="footer">
+        <p>User Authentication &amp; Authorization System V1.0 &copy; <a href="http://elan2wang.github.io/">Jian Wang</a></p>
+    </footer>
+	<!-- FOTTER END -->
+</body>
+</html>

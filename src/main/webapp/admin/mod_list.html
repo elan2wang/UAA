@@ -1,0 +1,84 @@
+<script src="scripts/libs/app.js" type="text/javascript"></script>
+<script src="scripts/admin/mod_list.js" type="text/javascript"></script>
+<div class="tab-pane active">
+	<div class="page-sidebar nav-collapse collapse">
+		<ul class="page-sidebar-menu">
+			<li class="open"><a href="javascript:;"> <i
+					class="icon-home"></i><span class="title">根模块</span><span
+					class="arrow open"></span>
+			</a>
+				<ul class="sub-menu" id="modules" style="display: block;">
+					<!-- MODULE TREE APPEND HERE -->
+				</ul></li>
+		</ul>
+	</div>
+	<div class="page-check border-task1" style="width:320px; padding-top:15px">
+		<form class="form-horizontal" onsubmit="return false;">
+			<div class="control-group hide">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_id">模块编号</label>
+					<input type="hidden" id="mod_id" name="mod_id" placeholder="模块编号">
+				</div>
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_enable">模块状态</label>
+					<input type="hidden" id="mod_enable" name="mod_enable" placeholder="模块状态">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_level">模块级别</label>
+					<select id="mod_level" name="mod_level" class="input-lar" onchange="level_change()">
+						<option value="1">一级模块</option>
+						<option value="2">二级模块</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="father_mod">父&nbsp;模&nbsp;&nbsp;块</label>
+					<select id="father_mod" name="father_mod" class="input-lar">
+						<option value="1">根模块</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_type">模块类型</label>
+					<select id="mod_type" name="mod_type" class="input-lar">
+						<option value="sysadmin">系统管理</option>
+						<option value="business">业务模块</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_name">模块名称</label>
+					<input type="text" id="mod_name" name="mod_name" placeholder="模块名称">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_link">模块链接</label>
+					<input type="text" id="mod_link" name="mod_link" placeholder="模块链接">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_description">模块描述</label>
+					<textarea id="mod_description" name="mod_description" placeholder="请填写描述信息"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls1">
+					<label class="fl mr10 text-right input-smal" for="mod_order">模块排序</label>
+					<input type="text" id="mod_order" name="mod_order" placeholder="显示顺序，格式: 1/1.01/.../10.13/...">
+				</div>
+			</div>
+			<hr class="line">
+			<button type="submit" id="btn_mod_add_submit" class="btn btn-success">保存</button>
+			<button type="submit" id="btn_mod_edit_submit" class="btn btn-success hide">修改</button>
+			<button type="submit" id="btn_mod_switch_submit" class="btn btn-inverse hide">启用</button>
+			<button type="submit" id="btn_mod_delete_submit" class="btn btn-danger hide">删除</button>
+		</form>
+	</div>
+</div>

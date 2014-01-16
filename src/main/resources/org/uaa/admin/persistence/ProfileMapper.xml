@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.ProfileMapper">
+	
+	<insert id="insertProfile" parameterType="Profile">
+		INSERT INTO uaa_profile
+		(account_id, nationality, language, gender, age, avatar, birthday, realname, idtype, idnum,
+		address, position, department, description, last_modify_time, last_modify_person)
+		VALUES
+		(#{account_id}, #{nationality}, #{language}, #{gender}, #{age}, #{avatar}, #{birthday}, 
+		 #{realname}, #{idtype}, #{idnum}, #{address}, #{position}, #{department}, #{description}, 
+		 #{last_modify_time}, #{last_modify_person})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="profile_id">
+			SELECT LAST_INSERT_ID() AS profile_id
+		</selectKey>
+	</insert>
+	
+	<update id="updateProfile" parameterType="Profile">
+		UPDATE uaa_profile
+		<set>
+			<if test="nationality != null">nationality = #{nationality},</if>
+			<if test="language != null">language = #{language},</if>
+			<if test="gender != null">gender = #{gender},</if>
+			<if test="age != null">age = #{age},</if>
+			<if test="avatar != null">avatar = #{avatar},</if>
+			<if test="birthday != null">birthday = #{birthday},</if>
+			<if test="realname != null">realname = #{realname},</if>
+			<if test="idtype != null">idtype = #{idtype},</if>
+			<if test="idnum != null">idnum = #{idnum},</if>
+			<if test="address != null">address = #{address},</if>
+			<if test="department != null">department = #{department},</if>
+			<if test="description != null">description = #{description},</if>
+			<if test="last_modify_time != null">last_modify_time = #{last_modify_time},</if>
+			<if test="last_modify_person != null">last_modify_person = #{last_modify_person}</if>
+		</set>
+		WHERE profile_id = #{profile_id}
+	</update>
+	
+	<select id="queryProfile" parameterType="java.util.Map" resultType="Profile">
+		SELECT * FROM uaa_profile
+		<where>
+			<if test="account_id != null">account_id = #{account_id}</if>
+		</where>
+	</select>
+
+	<select id="queryProfiles" resultType="Profile">
+		SELECT * FROM uaa_profile
+	</select>
+</mapper>

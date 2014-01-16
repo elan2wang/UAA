@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.RoleMapper">
+
+	<insert id="insertRole" parameterType="Role">
+		INSERT INTO uaa_role
+		(role_name, role_level, role_type, role_description, role_enable)
+		VALUES
+		(#{role_name}, #{role_level}, #{role_type}, #{role_description}, #{role_enable})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="role_id">
+			SELECT LAST_INSERT_ID() AS role_id
+		</selectKey>
+	</insert>
+
+	<update id="updateRole" parameterType="Role">
+		UPDATE uaa_role
+		<set>
+			<if test="role_name != null">role_name = #{role_name},</if>
+			<if test="role_level != null">role_level = #{role_level},</if>
+			<if test="role_type != null">role_type = #{role_type},</if>
+			<if test="role_description != null">role_description = #{role_description},</if>
+			<if test="role_enable != null">role_enable = #{role_enable}</if>
+		</set>
+		WHERE role_id = #{role_id}
+	</update>
+
+	<delete id="deleteRole" parameterType="Integer">
+		DELETE FROM uaa_role WHERE role_id = #{role_id}
+	</delete>
+
+	<select id="queryRole" parameterType="java.util.Map" resultType="Role">
+		SELECT * FROM uaa_role
+		<where>
+			<if test="role_id != null">
+				role_id = #{role_id}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryRoles" parameterType="java.util.Map" resultType="Role">
+		SELECT * FROM uaa_role
+		<where>
+			<if test="role_level != null">AND role_level = #{role_level}</if>
+			<if test="role_name != null">AND role_name LIKE '%${role_name}%'</if>
+			<if test="role_enable != null">AND role_enable = #{role_enable}</if>
+			<if test="role_type != null">AND role_type = #{role_type}</if>
+		</where>
+	</select>
+
+</mapper>

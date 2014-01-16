@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.ModuleMapper">
+
+	<insert id="insertModule" parameterType="Module">
+		INSERT INTO uaa_module
+		(mod_name, mod_link, mod_type, mod_description, mod_order, mod_enable, mod_level, father_mod)
+		VALUES
+		(#{mod_name}, #{mod_link}, #{mod_type}, #{mod_description}, #{mod_order}, #{mod_enable},
+		#{mod_level}, #{father_mod})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="mod_id">
+			SELECT LAST_INSERT_ID() AS mod_id
+		</selectKey>
+	</insert>
+
+	<update id="updateModule" parameterType="Module">
+		UPDATE uaa_module
+		<set>
+			<if test="mod_name != null">mod_name = #{mod_name},</if>
+			<if test="mod_link != null">mod_link = #{mod_link},</if>
+			<if test="mod_level != null">mod_level = #{mod_level},</if>
+			<if test="father_mod != null">father_mod = #{father_mod},</if>
+			<if test="mod_type != null">mod_type = #{mod_type},</if>
+			<if test="mod_description != null">mod_description = #{mod_description},</if>
+			<if test="mod_order != null">mod_order = #{mod_order},</if>
+			<if test="mod_enable != null">mod_enable = #{mod_enable}</if>
+		</set>
+		WHERE mod_id = #{mod_id}
+	</update>
+
+	<delete id="deleteModule" parameterType="Integer">
+		DELETE FROM uaa_module WHERE mod_id=#{mod_id}
+	</delete>
+
+	<select id="queryModule" parameterType="java.util.Map" resultType="Module">
+		SELECT * FROM uaa_module
+		<where>
+			<if test="mod_id != null">
+				mod_id = #{mod_id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryModules" parameterType="java.util.Map" resultType="Module">
+		SELECT * FROM uaa_module
+		<where>
+			<if test="mod_level != null">mod_level = #{mod_level}</if>
+			<if test="fater_mod != null">fater_mod = #{fater_mod}</if>
+ 		</where>
+ 		ORDER BY mod_order ASC
+	</select>
+
+	<select id="queryMenuModules" parameterType="java.util.Map" resultType="Module">
+		SELECT * FROM uaa_module module, uaa_roleModule roleMod
+		<where>
+			roleMod.mod_id=module.mod_id
+			AND module.mod_level=#{mod_level}
+			<if test="roles != null">
+				AND	roleMod.role_id in
+				<foreach item="role" index="index" collection="roles" open="(" separator="," close=")">
+	       			 #{role}
+	  			</foreach>
+  			</if>
+ 		</where>
+ 		ORDER BY module.mod_order ASC
+	</select>
+
+	<select id="querySubModules" parameterType="java.util.Map" resultType="Module">
+		SELECT * FROM uaa_module module, uaa_roleModule roleMod
+		<where>
+			roleMod.mod_id=module.mod_id
+			AND module.father_mod=#{father_mod}
+			<if test="roles != null">
+				AND	roleMod.role_id in
+				<foreach item="role" index="index" collection="roles" open="(" separator="," close=")">
+	       			 #{role}
+	  			</foreach>
+  			</if>
+ 		</where>
+ 		ORDER BY module.mod_order ASC
+	</select>
+	
+</mapper>

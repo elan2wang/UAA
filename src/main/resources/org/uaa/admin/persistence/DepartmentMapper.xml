@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.uaa.admin.persistence.DepartmentMapper">
+
+	<select id="queryDepartment" parameterType="java.util.Map" resultType="Department">
+		SELECT * FROM uaa_department
+		<where>
+			<if test="dep_id != null">dep_id = #{dep_id}</if>
+ 		</where>
+	</select>
+	
+	<select id="queryDepartments" parameterType="java.util.Map" resultType="Department">
+		SELECT * FROM uaa_department
+		<where>
+			<if test="dep_level != null">dep_level = #{dep_level}</if>
+ 		</where>
+	</select>
+	
+	<select id="queryDepartmentsByCondition" parameterType="java.util.Map" resultType="Department">
+		SELECT * FROM uaa_department
+		<where>
+			<if test="dep_level != null">dep_level = #{dep_level}</if>
+			<if test="dep_name != null">AND dep_name LIKE '%${dep_name}%'</if>
+ 		</where>
+ 		<if test="startIndex != null and currentItemCount != null">
+			LIMIT #{startIndex}, #{currentItemCount}
+		</if>
+	</select>
+	
+	<select id="getDepartmentsCountByCondition" parameterType="java.util.Map" resultType="Integer">
+		SELECT COUNT(*) FROM uaa_department
+		<where>
+			<if test="dep_level != null">dep_level = #{dep_level}</if>
+			<if test="dep_name != null">AND dep_name LIKE '%${dep_name}%'</if>
+ 		</where>
+	</select>
+	
+	<insert id="addDepartment"  parameterType="Department" useGeneratedKeys="true" keyProperty="dep_id">
+		INSERT INTO uaa_department
+		(dep_name, dep_level, address)
+		VALUES
+		(#{dep_name}, #{dep_level}, #{address})
+	</insert>
+	
+	<update id="updateDepartment" parameterType="Department">
+		UPDATE uaa_department
+		<set>
+			<if test="dep_name!=null">dep_name = #{dep_name},</if>
+			<if test="dep_level!=null">dep_level = #{dep_level},</if>
+			<if test="address!=null">address = #{address}</if>
+		</set>
+		WHERE dep_id = #{dep_id}
+	</update>
+	
+	<delete id="deleteDepartment" parameterType="Integer">
+		DELETE FROM	uaa_department WHERE dep_id = #{dep_id}
+	</delete>
+	
+</mapper>

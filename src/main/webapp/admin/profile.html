@@ -1,0 +1,104 @@
+<form class="form-horizontal" onsubmit="return false;">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h5>个人档案</h5>
+	</div>
+	<div class="modal-body">
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">真实姓名</label> <input id="realname"
+					name="realname" type="text" class="input-medium"
+					placeholder="请填写真实用户名" />
+			</div>
+			<div class="controls1">
+				<label class="fl mr10 text-right">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</label>
+				<input id="age" name="age" type="text" class="input-medium"
+					placeholder="请填写年龄" />
+			</div>
+		</div>
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">国&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;籍</label>
+				<input id="nationality" name="nationality" type="text"
+					class="input-medium" placeholder="请填写国籍" />
+			</div>
+			<div class="controls1">
+				<label class="fl mr10 text-right">语&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;言</label>
+				<input id="language" name="language" type="text"
+					class="input-medium" placeholder="请填写语言" />
+			</div>
+		</div>
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+				<select id="gender" name="gender" style="width: 164px">
+					<option value="male">男性</option>
+					<option value="female">女性</option>
+					<option value="unknown">未提供</option>
+				</select>
+			</div>
+			<div class="controls1 input-append date form_date">
+				<label class="fl mr10 text-right">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</label>
+				<input style="width: 122px" id="birthday" name="birthday" type="text" size="16"
+					placeholder="请填写生日"> <span class="add-on"><i
+					class="icon-th"></i></span>
+			</div>
+		</div>
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">证件类型</label> <select id="idtype"
+					name="idtype" style="width: 164px">
+					<option value="身份证">身份证</option>
+					<option value="护照">护照</option>
+				</select>
+			</div>
+			<div class="controls1">
+				<label class="fl mr10 text-right">证件编号</label> <input id="idnum"
+					name="idnum" type="text" class="input-medium" placeholder="请填写证件编号" />
+			</div>
+		</div>
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门</label>
+				<input id="department" name="department" type="text"
+					class="input-medium" placeholder="请填写部门" />
+			</div>
+			<div class="controls1">
+				<label class="fl mr10 text-right">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位</label>
+				<input id="position" name="position" type="text"
+					class="input-medium" placeholder="请填写职位" />
+			</div>
+		</div>
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">通讯地址</label> <input id="address"
+					name="address" type="text" class="input-xlarge"
+					placeholder="请填写通讯地址" />
+			</div>
+		</div>
+		<div class="control-group margin-bottom-10">
+			<div class="controls1">
+				<label class="fl mr10 text-right">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</label>
+				<textarea id="description" name="description" class="input-xlarge"
+					placeholder="请填写描述信息" rows="3"></textarea>
+			</div>
+		</div>
+		<hr class="line">
+		<button id="btn_add_profile_submit" type="submit" class="btn btn-success"
+			onclick="add_profile_submit(this)">保存</button>
+		<button id="btn_edit_profile_submit" type="submit" class="btn btn-success"
+			onclick="edit_profile_submit(this)">修改</button>
+	</div>
+	<script type="text/javascript">
+		$('.form_date').datetimepicker({
+			format : 'yyyy-mm-dd',
+			autoclose : true,
+			startView : 2,
+			minView : 2,
+			todayBtn : "linked",
+			todayHighlight : true,
+			pickerPosition : "bottom-left",
+			language : 'zh-CN'
+		});
+	</script>
+</form>
