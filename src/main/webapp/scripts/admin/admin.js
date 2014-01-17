@@ -7,7 +7,7 @@
  */ 
 
 // APIs used by this script
-var change_password_api = "/uaa/1/accounts/password";
+var change_password_api = "/uaa/1/users/password";
 var view_profile_api = "/uaa/1/profiles/view";
 var add_profile_api = "/uaa/1/profiles/add";
 var update_profile_api = "/uaa/1/profiles/update";
@@ -69,8 +69,8 @@ function change_password_submit() {
 						window.location.href = "/uaa/login.html";
 					}
 				});
-			} else if (typeof(result.error_code) != "undefined") {
-				bootbox.alert(result.error_msg);
+			} else if (typeof(result.data.result_code) != "undefined") {
+				bootbox.alert(result.data.result_msg);
 				return;
 			}
 		},
@@ -99,10 +99,10 @@ function view_profile(uid) {
 		$.ajax({
 			url: view_profile_api,
 			type: "get",
-			data: {account_id: uid},
+			data: {user_id: uid},
 			dataType: "JSON",
 			success: function(result) {
-				if (typeof(result.error_code) != "undefined" && result.error_code == "20701") {
+				if (typeof(result.data.result_code) != "undefined" && result.data.result_code == "20701") {
 					$("#btn_add_profile_submit").removeClass("hide");
 					$("#btn_edit_profile_submit").addClass("hide");
 				} else if (typeof(result.data.profile_id) != "undefined"){
@@ -141,8 +141,8 @@ function add_profile_submit(obj) {
 		success: function(result) {
 			if (typeof(result.data.result_code) != "undefined") {
 				alert("档案信息添加成功");
-			} else if (typeof(result.error_code) != "undefined") {
-				alert(result.error_msg);
+			} else if (typeof(result.data.result_code) != "undefined") {
+				alert(result.data.result_msg);
 			}
 		},
 		error: function(result) {
@@ -165,8 +165,8 @@ function edit_profile_submit(obj) {
 		success: function(result) {
 			if (typeof(result.data.result_code) != "undefined") {
 				alert("档案信息修改成功");
-			} else if (typeof(result.error_code) != "undefined") {
-				alert(result.error_msg);
+			} else if (typeof(result.data.result_code) != "undefined") {
+				alert(result.data.result_msg);
 			}
 		},
 		error: function(result) {

@@ -117,6 +117,7 @@ public class Authorities extends BaseResource {
 	public String getAuthority(@QueryParam("auth_id") Integer auth_id) {
 		 Authority auth = authorityService.queryAuthorityById(auth_id);
 		 if (auth == null) {
+			 request = uriInfo.getRequestUri().toString();
 			 ResponseWithStatus response = new ResponseWithStatus(request, "20201", ConfigUtil.getValue("20201"));
 			 return response.toJson();
 		 }
@@ -139,6 +140,7 @@ public class Authorities extends BaseResource {
 		
 		authorityService.insertAuthority(auth);
 
+		request = uriInfo.getRequestUri().toString();
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Add Authority Successfully");
 		return response.toJson();
 	}
@@ -157,6 +159,7 @@ public class Authorities extends BaseResource {
 		
 		authorityService.updateAuthority(auth);
 
+		request = uriInfo.getRequestUri().toString();
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Update Authority Successfully");
 		return response.toJson();
 	}
@@ -165,8 +168,8 @@ public class Authorities extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String deleteAuthority(@FormParam("auth_id") Integer auth_id) {
 		Authority auth = authorityService.queryAuthorityById(auth_id);
+		request = uriInfo.getRequestUri().toString();
 		if (auth == null) {
-			 String request = uriInfo.getPath();
 			 ResponseWithStatus response = new ResponseWithStatus(request, "20201", ConfigUtil.getValue("20201"));
 			 return response.toJson();
 		}
@@ -182,6 +185,7 @@ public class Authorities extends BaseResource {
 	public String switch_enable(@FormParam("auth_id") Integer auth_id, @FormParam("enable") Boolean enable) {
 		Authority auth = authorityService.queryAuthorityById(auth_id);
 		if (auth == null) {
+			request = uriInfo.getRequestUri().toString();
 			 ResponseWithStatus response = new ResponseWithStatus(request, "20201", ConfigUtil.getValue("20201"));
 			 return response.toJson();
 		}
@@ -189,6 +193,7 @@ public class Authorities extends BaseResource {
 		authorityService.updateAuthority(auth);
 
 		ResponseWithStatus response;
+		request = uriInfo.getRequestUri().toString();
 		if (enable) {
 			response = new ResponseWithStatus(request, "10000", "Enable Authority Successfully");
 		} else {
@@ -201,6 +206,7 @@ public class Authorities extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String assignResources(@FormParam("auth_id") Integer auth_id, @FormParam("resources") String resources) {
 		Authority auth = authorityService.queryAuthorityById(auth_id);
+		request = uriInfo.getRequestUri().toString();
 		if (auth == null) {
 			 ResponseWithStatus response = new ResponseWithStatus(request, "20201", ConfigUtil.getValue("20201"));
 			 return response.toJson();

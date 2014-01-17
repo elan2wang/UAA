@@ -105,8 +105,8 @@ $(function(){
 			success: function (result) {
 				if ( typeof(result.data) != "undefined") {
 					bootbox.alert(result.data.result_msg);
-				} else if (typeof(result.error_code) != "undefined") {
-					bootbox.alert(result.error_msg);
+				} else if (typeof(result.data.result_code) != "undefined") {
+					bootbox.alert(result.data.result_msg);
 				}
 			}
 		});
@@ -143,8 +143,8 @@ function init(url) {
 		data: {},
 		dataType: "JSON",
 		success: function (result) {
-			if(typeof(result.error_code) != "undefined"){
-				$("#auth_list").html('<tr><td colspan="8" style="text-align:center;"><span style="color:red;">'+result.error_msg+'</span></td></tr>');
+			if(typeof(result.data.result_code) != "undefined"){
+				$("#auth_list").html('<tr><td colspan="8" style="text-align:center;"><span style="color:red;">'+result.data.result_msg+'</span></td></tr>');
 			}
 			else if(typeof(result.data) != "undefined" && result.data){
 				var data = result.data;

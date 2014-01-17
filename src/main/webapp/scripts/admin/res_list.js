@@ -110,8 +110,8 @@ function init(url) {
 		data: {},
 		dataType: "JSON",
 		success: function (result) {
-			if(typeof(result.error_code) != "undefined"){
-				$("#res_list").html('<tr><td colspan="8" style="text-align:center;"><span style="color:red;">'+result.error_msg+'</span></td></tr>');
+			if(typeof(result.data.result_code) != "undefined"){
+				$("#res_list").html('<tr><td colspan="8" style="text-align:center;"><span style="color:red;">'+result.data.result_msg+'</span></td></tr>');
 			}
 			else if(typeof(result.data) != "undefined" && result.data){
 				var data = result.data;

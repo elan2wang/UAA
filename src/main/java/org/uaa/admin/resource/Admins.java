@@ -41,6 +41,7 @@ import org.uaa.admin.service.RoleService;
 import org.uaa.common.BaseResource;
 import org.uaa.common.http.ResponseWithData;
 import org.uaa.common.http.ResponseWithStatus;
+import org.uaa.security.SecuritySupport;
 import org.uaa.security.core.SecurityContextHolder;
 
 /**
@@ -68,6 +69,8 @@ public class Admins extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public String login() {
 		log.info("Login successfully");
+		
+		request = uriInfo.getRequestUri().toString();
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Login Successfully");
 		return response.toJson();
 	}
@@ -131,14 +134,15 @@ public class Admins extends BaseResource{
 		return response.toJson();
 	}
 	
-	/*
+	
 	@Path("reload_security_meta_source") @GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String reloadSecurityMetaSource() {
 		SecuritySupport.reloadSecurityMetadataSource();
 		
+		request = uriInfo.getRequestUri().toString();
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "reload security meta source successfully");
 		return response.toJson();
-	}*/
+	}
 		
 }

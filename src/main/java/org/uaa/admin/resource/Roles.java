@@ -125,6 +125,7 @@ public class Roles extends BaseResource{
 	@Path("/view") @GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRole(@QueryParam("role_id") Integer role_id) {
+		request = uriInfo.getRequestUri().toString();
 		Role role = roleService.queryRole(role_id);
 		if (role == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20101", ConfigUtil.getValue("20101"));
@@ -142,6 +143,7 @@ public class Roles extends BaseResource{
 	public String addRole(@FormParam("role_name") String role_name,
 			@FormParam("role_level") Integer role_level, @FormParam("role_type") String role_type,
 			@FormParam("role_description") String role_description) {
+		request = uriInfo.getRequestUri().toString();
 		Role role = new Role();
 		role.setRole_name(role_name);
 		role.setRole_level(role_level);
@@ -183,6 +185,7 @@ public class Roles extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String switchRole(@FormParam("role_id") Integer role_id, @FormParam("enable") Boolean enable) {
+		request = uriInfo.getRequestUri().toString();
 		Role role = roleService.queryRole(role_id);
 		if (role == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20101", ConfigUtil.getValue("20101"));
@@ -223,6 +226,7 @@ public class Roles extends BaseResource{
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String assignAuthorities(@FormParam("role_id") Integer role_id, 
 			@FormParam("auth_ids") String auth_ids, @FormParam("mod_id") Integer mod_id) {
+		request = uriInfo.getRequestUri().toString();
 		if (role_id == null || role_id.equals("")) {
 			String error_msg = String.format(ConfigUtil.getValue("10010"), "role_id");
 			ResponseWithStatus response = new ResponseWithStatus(request, "10010", error_msg);

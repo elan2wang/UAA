@@ -5,15 +5,15 @@
 			<legend>用户信息维护</legend>
 			<div class="control-group">
 				<div class="controls1">
-					<a class="config" href="#account_add_panel" data-toggle="modal">
-						<button id="btn_account_add" name="btn_account_add"
+					<a class="config" href="#user_add_panel" data-toggle="modal">
+						<button id="btn_user_add" name="btn_user_add"
 							class="btn btn-success" type="button">
 							<i class="icon-user"></i> 新增用户 <i class="icon-plus"></i>
 						</button>
 					</a>
 				</div>
 				<div class="controls1">
-					<select id="filter_account_enable" class="input-small">
+					<select id="filter_user_enable" class="input-small">
 						<option value="">所有状态</option>
 						<option value="true">已启用</option>
 						<option value="false">已禁用</option>
@@ -24,7 +24,7 @@
 					</select> <input type="text" class="input-small" placeholder="用户名"
 						id="filter_username">
 					<button type="submit" class="btn btn-success"
-						id="btn_account_filter" name="btn_account_filter">
+						id="btn_user_filter" name="btn_user_filter">
 						<i class="icon-filter"></i> 筛选
 					</button>
 				</div>
@@ -41,11 +41,11 @@
 						<th>操作</th>
 					</tr>
 				</thead>
-				<tbody id="account_list">
+				<tbody id="user_list">
 					<!-- ACCOUNT LIST APPEND HERE -->
 				</tbody>
 			</table>
-			<div id="account_add_panel" class="modal hide" style="width: 350px">
+			<div id="user_add_panel" class="modal hide" style="width: 350px">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button"></button>
 					<h5>用户详情</h5>
@@ -54,14 +54,14 @@
 					<div class="control-group hide">
 						<div class="controls1">
 							<label class="fl mr10 text-right input-smal">用 &nbsp;户
-								&nbsp;名</label> <input id="account_id" name="account_id"
+								&nbsp;名</label> <input id="user_id" name="user_id"
 								class="input-middle" type="text" size="16" value="">
 						</div>
 					</div>
 					<div class="control-group">
 						<div class="controls1">
 							<label class="fl mr10 text-right input-smal">用 &nbsp;户
-								&nbsp;名</label> <input id="account_name" name="account_name"
+								&nbsp;名</label> <input id="user_name" name="user_name"
 								class="input-middle" type="text" size="16" value="">
 						</div>
 					</div>
@@ -92,9 +92,9 @@
 					<hr class="line">
 					<button type="reset" class="btn purple offset1">重置</button>
 					<button type="submit" class="btn btn-success"
-						id="btn_account_add_submit" name="btn_account_add_submit">保存</button>
+						id="btn_user_add_submit" name="btn_user_add_submit">保存</button>
 					<button type="submit" class="btn btn-success"
-						id="btn_account_edit_submit" name="btn_account_edit_submit">修改</button>
+						id="btn_user_edit_submit" name="btn_user_edit_submit">修改</button>
 				</div>
 			</div>
 			<div id="role_dep_assign_panel" class="modal hide">

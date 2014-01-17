@@ -3,7 +3,7 @@
  * email:	shohokh@gmail.com
  * create:	2013－8-21
  * 
- * this script is used by account_list.html
+ * this script is used by user_list.html
  */ 
 
 // APIs used by this script
@@ -24,21 +24,21 @@ $(function(){
 	init(user_list_api);
 
 	// 筛选
-	$("#btn_account_filter").click(function(){
+	$("#btn_user_filter").click(function(){
 		var data = get_filter_data();
 		init(user_list_api+"?"+data);
 	});
 	
 	//  点击新增帐号按钮时触发，加载部门列表
-	$("#btn_account_add").click(function(){		
-		$("#btn_account_add_submit").removeClass("hide");
-		$("#btn_account_edit_submit").addClass("hide");
+	$("#btn_user_add").click(function(){		
+		$("#btn_user_add_submit").removeClass("hide");
+		$("#btn_user_edit_submit").addClass("hide");
 		load_departments("department");
 	});
 
 	// 新增帐号确认时触发，创建新帐号
-	$("#btn_account_add_submit").click(function(){
-		var username = $("#account_name").val();
+	$("#btn_user_add_submit").click(function(){
+		var username = $("#user_name").val();
 		var email = $("#email").val();
 		var mobile = $("#mobile").val();
 		var department = $("#department").val();
@@ -52,23 +52,23 @@ $(function(){
 			dataType: "JSON",
 			success: function(result) {
 				$("#progress-bar").modal("hide");
-				$("#account_add_panel").modal("hide");
+				$("#user_add_panel").modal("hide");
 				var result_code = result.data.result_code;
 				if(typeof(result_code) != "undefined" && parseInt(result_code) == 10000) {
 					bootbox.alert(result.data.result_msg);
 					// 刷新Tab
 					refresh_tab();
-				} else if (typeof(result.error_code) != "undefined") {
-					bootbox.alert(result.error_msg);
+				} else if (typeof(result.data.result_code) != "undefined") {
+					bootbox.alert(result.data.result_msg);
 				}
 			}
 		});
 	});
 
 	// 编辑帐号确认时触发，更新帐号
-	$("#btn_account_edit_submit").click(function(){
-		var user_id = $("#account_id").val();
-		var username = $("#account_name").val();
+	$("#btn_user_edit_submit").click(function(){
+		var user_id = $("#user_id").val();
+		var username = $("#user_name").val();
 		var email = $("#email").val();
 		var mobile = $("#mobile").val();
 		var department = $("#department").val();
@@ -83,12 +83,12 @@ $(function(){
 				$("#progress-bar").modal("hide");
 				var result_code = result.data.result_code;
 				if(typeof(result_code) != "undefined" && parseInt(result_code) == 10000) {
-					$("#account_add_panel").modal("hide");
+					$("#user_add_panel").modal("hide");
 					bootbox.alert(result.data.result_msg);
 					// 刷新Tab
 					refresh_tab();
-				} else if (typeof(result.error_code) != "undefined") {
-					bootbox.alert(result.error_msg);
+				} else if (typeof(result.data.result_code) != "undefined") {
+					bootbox.alert(result.data.result_msg);
 				}
 			}
 		});
@@ -101,7 +101,7 @@ $(function(){
 			roles += $(this).val()+",";
 		});
 		roles = roles.substr(0, roles.length-1);
-		var user_id = $("#account_id").val();
+		var user_id = $("#user_id").val();
 		$.ajax({
 			url: user_assign_role_api,
 			type: "post",
@@ -111,8 +111,8 @@ $(function(){
 				var result_code = result.data.result_code;
 				if (typeof(result_code) != "undefined" && result_code == 10000) {
 					bootbox.alert(result.data.result_msg);
-				} else if (typeof(result.error_code) != "undefined") {
-					bootbox.alert(result.error_msg);
+				} else if (typeof(result.data.result_code) != "undefined") {
+					bootbox.alert(result.data.result_msg);
 				}
 			} 
 		});
@@ -125,7 +125,7 @@ $(function(){
 			deps += $(this).val()+",";
 		});
 		deps = deps.substr(0, deps.length-1);
-		var user_id = $("#account_id").val();
+		var user_id = $("#user_id").val();
 		$.ajax({
 			url: user_assign_dep_api,
 			type: "post",
@@ -135,8 +135,8 @@ $(function(){
 				var result_code = result.data.result_code;
 				if (typeof(result_code) != "undefined" && result_code == 10000) {
 					bootbox.alert(result.data.result_msg);
-				} else if (typeof(result.error_code) != "undefined") {
-					bootbox.alert(result.error_msg);
+				} else if (typeof(result.data.result_code) != "undefined") {
+					bootbox.alert(result.data.result_msg);
 				}
 			} 
 		});
@@ -146,8 +146,8 @@ $(function(){
 
 function get_filter_data() {
 	var data = '';
-	if ($("#filter_account_enable").val() != "") {
-		data += "&account_enable="+$("#filter_account_enable").val();
+	if ($("#filter_user_enable").val() != "") {
+		data += "&user_enable="+$("#filter_user_enable").val();
 	}
 	if ($("#filter_dep_id").val() != "") {
 		data += "&dep_id="+$("#filter_dep_id").val();
@@ -162,7 +162,7 @@ function get_filter_data() {
 }
 
 function init(url) {
-	$("#account_list").html(loading);
+	$("#user_list").html(loading);
 	var selected_dep = $("#filter_dep_id").val();
 	load_departments("filter_dep_id", selected_dep);
 	$.ajax({
@@ -171,8 +171,8 @@ function init(url) {
 		data: {},
 		dataType: "JSON",
 		success: function (result) {
-			if(typeof(result.error_code) != "undefined"){
-				$("#auth_list").html('<tr><td colspan="8" style="text-align:center;"><span style="color:red;">'+result.error_msg+'</span></td></tr>');
+			if(typeof(result.data.result_code) != "undefined"){
+				$("#auth_list").html('<tr><td colspan="8" style="text-align:center;"><span style="color:red;">'+result.data.result_msg+'</span></td></tr>');
 			}
 			else if(typeof(result.data) != "undefined" && result.data){
 				var data = result.data;
@@ -185,17 +185,17 @@ function init(url) {
 					set_pagination(currentPage, totalPages, itemsPerPage, data.nextLink);
 					// 封装列表信息
 					var items = data.items;
-					var accounts = '';
+					var users = '';
 					for (var i=0; i<items.length; i++) {
-						var id = items[i].account_id;
+						var id = items[i].user_id;
 						var username = items[i].username;
-						accounts += '<tr><td>'+(i+1)+'</td>';
-						accounts += '<td>'+username+'</td>';
-						accounts += '<td>'+items[i].email+'</td>';
-						accounts += '<td>'+items[i].mobile+'</td>';
-						accounts += '<td>'+items[i].department+'</td>';
+						users += '<tr><td>'+(i+1)+'</td>';
+						users += '<td>'+username+'</td>';
+						users += '<td>'+items[i].email+'</td>';
+						users += '<td>'+items[i].mobile+'</td>';
+						users += '<td>'+items[i].department+'</td>';
 						var state, op_info, enable;
-						if (items[i].account_enable == true) {
+						if (items[i].user_enable == true) {
 							state = '<i class="icon-ok-circle"></i>';
 							op_info = '禁用该用户';
 							enable = false;
@@ -204,18 +204,18 @@ function init(url) {
 							op_info = '启用该用户';
 							enable = true;
 						}
-						accounts += '<td style="text-align:center;"><a class="edit" title="'+op_info+'" href="javascript:void(0);" onclick="switch_enable('+id+','+enable+');return false;" >'+state+'</a></td>';
-						accounts += '<td><a class="edit" title="编辑用户信息" href="javascript:void(0);" onclick="edit_account('+id+');return false;" ><i class="icon-pencil"></i></a>  ';
-						accounts += '<a class="edit" title="查看用户档案" href="javascript:void(0);" onclick="view('+id+');return false;" ><i class="icon-eye-open"></i></a>  ';
-						accounts += '<a class="edit" title="重置用户密码" href="javascript:void(0);" onclick="reset_psd('+id+',\''+username+'\');return false;" ><i class="icon-key"></i></a>  ';
-						accounts += '<a class="edit" title="删除该用户" href="javascript:void(0);" onclick="delete_account('+id+');return false;" ><i class="icon-trash"></i></a>  ';
-						accounts += '<a class="edit" title="角色和部门分配" config" href="javascript:void(0);" onclick="assing_role_dep('+id+',\''+items[i].username+'\');return false;" data-toggle="modal"><i class="icon-certificate"></i></a>';
-						accounts += '</td></tr>';
+						users += '<td style="text-align:center;"><a class="edit" title="'+op_info+'" href="javascript:void(0);" onclick="switch_enable('+id+','+enable+');return false;" >'+state+'</a></td>';
+						users += '<td><a class="edit" title="编辑用户信息" href="javascript:void(0);" onclick="edit_user('+id+');return false;" ><i class="icon-pencil"></i></a>  ';
+						users += '<a class="edit" title="查看用户档案" href="javascript:void(0);" onclick="view('+id+');return false;" ><i class="icon-eye-open"></i></a>  ';
+						users += '<a class="edit" title="重置用户密码" href="javascript:void(0);" onclick="reset_psd('+id+',\''+username+'\');return false;" ><i class="icon-key"></i></a>  ';
+						users += '<a class="edit" title="删除该用户" href="javascript:void(0);" onclick="delete_user('+id+');return false;" ><i class="icon-trash"></i></a>  ';
+						users += '<a class="edit" title="角色和部门分配" config" href="javascript:void(0);" onclick="assing_role_dep('+id+',\''+items[i].username+'\');return false;" data-toggle="modal"><i class="icon-certificate"></i></a>';
+						users += '</td></tr>';
 					}
-					$("#account_list").html(accounts);
+					$("#user_list").html(users);
 				} else {
 					$("#pagination").html("");
-					$("#account_list").html(no_data);
+					$("#user_list").html(no_data);
 				}
 			}
 		}
@@ -261,23 +261,23 @@ function load_departments(tag_id, my_dep) {
  * 
  * @param id
  */
-function edit_account(id) {
+function edit_user(id) {
 	$.ajax({
 		url: user_view_api,
 		type: "get",
 		data: "user_id="+id,
 		dataType: "JSON",
 		success: function(result) {
-			if(typeof(result.data.account_id) != "undefined"){
-				$("#account_add_panel").modal("show");
-				$("#btn_account_edit_submit").removeClass("hide");
-				$("#btn_account_add_submit").addClass("hide");
-				var account = result.data;
-				$("#account_id").val(account.account_id);
-				$("#account_name").val(account.username);
-				$("#email").val(account.email);
-				$("#mobile").val(account.mobile);
-				load_departments("department", account.dep_id);
+			if(typeof(result.data.user_id) != "undefined"){
+				$("#user_add_panel").modal("show");
+				$("#btn_user_edit_submit").removeClass("hide");
+				$("#btn_user_add_submit").addClass("hide");
+				var user = result.data;
+				$("#user_id").val(user.user_id);
+				$("#user_name").val(user.username);
+				$("#email").val(user.email);
+				$("#mobile").val(user.mobile);
+				load_departments("department", user.dep_id);
 			}
 		}
 	});
@@ -297,11 +297,11 @@ function view(id) {
 			data: {user_id: id},
 			dataType: "JSON",
 			success: function(result) {
-				if (typeof(result.error_code) != "undefined") {
-					if (result.error_code == 20701) {
+				if (typeof(result.data.result_code) != "undefined") {
+					if (result.data.result_code == 20701) {
 						bootbox.alert("该用户尚未填写个人信息!");
 					} else {
-						bootbox.alert(result.error_msg);
+						bootbox.alert(result.data.result_msg);
 					}
 					return;
 				} else if (typeof(result.data.profile_id) != "undefined"){
@@ -336,7 +336,7 @@ function view(id) {
  * 
  * @param id 待删除帐号编号
  */
-function delete_account(id) {
+function delete_user(id) {
 	bootbox.confirm("您确定要删除该用户么?", function(result) {
 		if (result) {
 			$.ajax({
@@ -350,8 +350,8 @@ function delete_account(id) {
 						bootbox.alert(result.data.result_msg);
 						// 刷新Tab
 						refresh_tab();
-					} else if (typeof(result.error_code) != "undefined") {
-						bootbox.alert(result.error_msg);
+					} else if (typeof(result.data.result_code) != "undefined") {
+						bootbox.alert(result.data.result_msg);
 					}
 				}
 			});
@@ -376,8 +376,8 @@ function reset_psd(id, username) {
 					var result_code = result.data.result_code;
 					if (typeof(result_code) != "undefined" && result_code == 10000) {
 						bootbox.alert(result.data.result_msg);
-					} else if (typeof(result.error_code) != "undefined") {
-						bootbox.alert(result.error_msg);
+					} else if (typeof(result.data.result_code) != "undefined") {
+						bootbox.alert(result.data.result_msg);
 					}
 				}
 			});
@@ -416,7 +416,7 @@ function switch_enable(id, enable) {
 function assing_role_dep(id, username) {
 	$("#role_dep_assign_panel_header").html("分配部门和角色"+"["+username+"]");
 	$("#role_dep_assign_panel").modal();
-	$("#account_id").val(id);
+	$("#user_id").val(id);
 	$.ajax({
 		url: role_list_api,
 		type: "get",

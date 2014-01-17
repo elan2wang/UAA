@@ -104,6 +104,7 @@ public class Users extends BaseResource{
 	@Path("/view") @GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getUser(@QueryParam("user_id") Integer user_id) {
+		request = uriInfo.getRequestUri().toString();
 		User user = userService.queryUserById(user_id);
 		if (user == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20001", ConfigUtil.getValue("20001"));
@@ -124,6 +125,7 @@ public class Users extends BaseResource{
 	public String addUser(@FormParam("username") String username, 
 			@FormParam("department") Integer department, @FormParam("password") String password, 
 			@FormParam("email") String email, @FormParam("mobile") String mobile) throws NoSuchAlgorithmException {
+		request = uriInfo.getRequestUri().toString();
 		Integer uid = SecurityContextHolder.getContext().getAuthenticationToken().getUid();
 		
 		// 先用MD5加密，再用添加盐值的MD5加密
@@ -145,13 +147,13 @@ public class Users extends BaseResource{
 		return response.toJson();
 	}
 	
-	@Path("/update")
-	@POST
+	@Path("/update") @POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String updateUser(@FormParam("user_id") Integer user_id, 
 			@FormParam("username") String username, @FormParam("department") Integer department,
 			@FormParam("email") String email, @FormParam("mobile") String mobile) {
+		request = uriInfo.getRequestUri().toString();
 		User user = userService.queryUserById(user_id);
 		user.setUsername(username);
 		user.setEmail(email);
@@ -182,6 +184,7 @@ public class Users extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String changePassword(@FormParam("old_psd") String old_psd, @FormParam("new_psd") String new_psd) {
+		request = uriInfo.getRequestUri().toString();
 		Integer uid = SecurityContextHolder.getContext().getAuthenticationToken().getUid();
 		User user = userService.queryUserById(uid);
 		if (!Crypto.MD5Encrypt(old_psd).equals(user.getPassword())) {
@@ -200,6 +203,7 @@ public class Users extends BaseResource{
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String switchUser(@FormParam("user_id") Integer user_id, 
 			@FormParam("enable") Boolean enable) {
+		request = uriInfo.getRequestUri().toString();
 		User user = userService.queryUserById(user_id);
 		user.setUser_enable(enable);
 		
@@ -211,7 +215,6 @@ public class Users extends BaseResource{
 			msg = "Disable User Successfully";
 		}
 
-		String request = uriInfo.getPath();
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", msg);
 		return response.toJson();
 	}
@@ -219,6 +222,7 @@ public class Users extends BaseResource{
 	@Path("/delete") @POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public String deleteUser(@FormParam("user_id") Integer user_id) {
+		request = uriInfo.getRequestUri().toString();
 		// if user not exist
 		if (userService.queryUserById(user_id) == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20001", ConfigUtil.getValue("20001"));
@@ -235,6 +239,7 @@ public class Users extends BaseResource{
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String assignRole(@FormParam("user_id") Integer user_id,
 			@FormParam("roles") String roles) {
+		request = uriInfo.getRequestUri().toString();
 		List<Integer> role_list = new ArrayList<Integer>();
 		for (String role : roles.split(",")){
 			role_list.add(Integer.parseInt(role));
@@ -253,6 +258,7 @@ public class Users extends BaseResource{
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String assignDep(@FormParam("user_id") Integer user_id,
 			@FormParam("deps") String deps) {
+		request = uriInfo.getRequestUri().toString();
 		List<Integer> dep_list = new ArrayList<Integer>();
 		for (String dep : deps.split(",")){
 			dep_list.add(Integer.parseInt(dep));

@@ -26,7 +26,7 @@
 			<if test="creator != null">creator = #{creator},</if>
 			<if test="create_time != null">create_time = #{create_time},</if>
 			<if test="user_enable != null">user_enable = #{user_enable},</if>
-			<if test="user_stauts != null">user_stauts = #{user_stauts},</if>
+			<if test="user_status != null">user_status = #{user_status},</if>
 			<if test="last_login_time != null">last_login_time = #{last_login_time},</if>
 			<if test="last_login_addr != null">last_login_addr = #{last_login_addr},</if>
 		</set>

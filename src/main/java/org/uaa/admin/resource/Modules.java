@@ -152,7 +152,7 @@ public class Modules extends BaseResource{
 			@FormParam("mod_link") String link, @FormParam("mod_type") String type,
 			@FormParam("father_mod") Integer father_mod, @FormParam("mod_level") Integer level,
 			@FormParam("mod_description") String description, @FormParam("mod_order") Double order) {
-
+		request = uriInfo.getRequestUri().toString();
 		Module module = new Module();
 		module.setMod_name(name);
 		module.setMod_link(link);
@@ -176,7 +176,7 @@ public class Modules extends BaseResource{
 			@FormParam("mod_link") String link, @FormParam("mod_type") String type,
 			@FormParam("father_mod") Integer father_mod, @FormParam("mod_level") Integer level,
 			@FormParam("mod_description") String description, @FormParam("mod_order") Double order) {
-
+		request = uriInfo.getRequestUri().toString();
 		Module module = moduleService.queryModuleById(id);
 		if (module == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20301", ConfigUtil.getValue("20301"));
@@ -201,6 +201,7 @@ public class Modules extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String switchModule(@FormParam("mod_id") Integer mod_id, @FormParam("mod_enable") Boolean mod_enable) {
+		request = uriInfo.getRequestUri().toString();
 		Module module = moduleService.queryModuleById(mod_id);
 		if (module == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20301", ConfigUtil.getValue("20301"));
@@ -225,6 +226,7 @@ public class Modules extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String deleteModule(@FormParam("mod_id") Integer mod_id) {
+		request = uriInfo.getRequestUri().toString();
 		Module module = moduleService.queryModuleById(mod_id);
 		if (module == null) {
 			ResponseWithStatus response = new ResponseWithStatus(request, "20301", ConfigUtil.getValue("20301"));

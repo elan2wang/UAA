@@ -33,7 +33,7 @@ public class Profile implements Serializable {
 	private static final long serialVersionUID = 1991158475114447084L;
 	
 	private Integer profile_id;
-	private Integer account_id;
+	private Integer user_id;
 	private String nationality;
 	private String language;
 	private String gender;
@@ -54,7 +54,7 @@ public class Profile implements Serializable {
 		super();
 	}
 
-	public Profile(Integer profile_id, Integer account_id, String nationality,
+	public Profile(Integer profile_id, Integer user_id, String nationality,
 			String language, String gender, Integer age, String avatar,
 			Date birthday, String realname, String idtype, String idnum,
 			String address, String position, String department,
@@ -62,7 +62,7 @@ public class Profile implements Serializable {
 			Integer last_modify_person) {
 		super();
 		this.profile_id = profile_id;
-		this.account_id = account_id;
+		this.user_id = user_id;
 		this.nationality = nationality;
 		this.language = language;
 		this.gender = gender;
@@ -88,12 +88,12 @@ public class Profile implements Serializable {
 		this.profile_id = profile_id;
 	}
 
-	public Integer getAccount_id() {
-		return account_id;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setAccount_id(Integer account_id) {
-		this.account_id = account_id;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getNationality() {
@@ -218,8 +218,8 @@ public class Profile implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Profile [profile_id=" + profile_id + ", account_id="
-				+ account_id + ", nationality=" + nationality + ", language="
+		return "Profile [profile_id=" + profile_id + ", user_id="
+				+ user_id + ", nationality=" + nationality + ", language="
 				+ language + ", gender=" + gender + ", age=" + age
 				+ ", avatar=" + avatar + ", birthday=" + birthday
 				+ ", realname=" + realname + ", idtype=" + idtype + ", idnum="
@@ -233,7 +233,7 @@ public class Profile implements Serializable {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		
 		map.put("profile_id", profile_id);
-		map.put("account_id", account_id);
+		map.put("user_id", user_id);
 		map.put("nationality", nationality);
 		map.put("language", language);
 		map.put("gender", gender);

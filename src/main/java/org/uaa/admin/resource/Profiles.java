@@ -61,10 +61,11 @@ public class Profiles extends BaseResource{
 			@FormParam("idtype") String idtype, @FormParam("idnum") String idnum, 
 			@FormParam("department") String department, @FormParam("position") String position, 
 			@FormParam("address") String address, @FormParam("description") String description) {
+		request = uriInfo.getRequestUri().toString();
 		Integer uid = SecurityContextHolder.getContext().getAuthenticationToken().getUid();
 		Profile profile = new Profile();
 		
-		profile.setAccount_id(uid);
+		profile.setUser_id(uid);
 		if (realname != null && !realname.equals("")) profile.setRealname(realname);
 		if (age != null && age != 0) profile.setAge(age);
 		if (nationality != null && !nationality.equals("")) profile.setNationality(nationality);
@@ -89,6 +90,7 @@ public class Profiles extends BaseResource{
 		
 		profileService.insertProfile(profile);
 		
+		request = uriInfo.getPath();
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Add Profile Successfully");
 		
 		return response.toJson();
@@ -102,6 +104,7 @@ public class Profiles extends BaseResource{
 			@FormParam("idtype") String idtype, @FormParam("idnum") String idnum, 
 			@FormParam("department") String department, @FormParam("position") String position, 
 			@FormParam("address") String address, @FormParam("description") String description) {
+		request = uriInfo.getRequestUri().toString();
 		Integer uid = SecurityContextHolder.getContext().getAuthenticationToken().getUid();
 		Profile profile = profileService.queryProfile(uid);
 		
@@ -136,12 +139,13 @@ public class Profiles extends BaseResource{
 	
 	@Path("/view") @GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getProfile(@QueryParam("account_id") Integer account_id) {
+	public String getProfile(@QueryParam("user_id") Integer user_id) {
+		request = uriInfo.getRequestUri().toString();
 		Integer uid;
-		if (account_id == null) {
+		if (user_id == null) {
 			uid = SecurityContextHolder.getContext().getAuthenticationToken().getUid();
 		} else {
-			uid = account_id;
+			uid = user_id;
 		}
 		Profile profile = profileService.queryProfile(uid);
 		if (profile == null) {

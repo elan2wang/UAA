@@ -114,6 +114,7 @@ public class Departments extends BaseResource{
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String addDepartment(@FormParam("dep_name") String dep_name,
 			@FormParam("dep_level") Integer dep_level, @FormParam("address") String address){
+		request = uriInfo.getRequestUri().toString();
 		Department department = new Department(dep_level, dep_name, address);
 		departmentService.addDepartment(department);
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Add Department Successfully");
@@ -126,6 +127,7 @@ public class Departments extends BaseResource{
 	public String addDepartment(@FormParam("dep_id") Integer dep_id, 
 			@FormParam("dep_name") String dep_name, @FormParam("dep_level") Integer dep_level, 
 			@FormParam("address") String address){
+		request = uriInfo.getRequestUri().toString();
 		Department department = departmentService.queryDepartment(dep_id);
 		department.setDep_level(dep_level);
 		department.setDep_name(dep_name);
@@ -139,6 +141,7 @@ public class Departments extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String deleteDepartment(@FormParam("dep_id") Integer dep_id){
+		request = uriInfo.getRequestUri().toString();
 		departmentService.deleteDepartment(dep_id);
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Delete Department Successfully");
 		return response.toJson();

@@ -75,8 +75,8 @@ $(function(){
 			$.post(department_add_api,data,function(result){
 				$("#progress-bar").modal("hide");
 				var msg = "";
-				if(typeof(result.error_code) != "undefined"){
-					msg = result.error_msg;
+				if(typeof(result.data.result_code) != "undefined"){
+					msg = result.data.result_msg;
 				}
 				else if(typeof(result.data.result_code) != "undefined" && parseInt(result.data.result_code) == 10000){
 					msg = result.data.result_msg;
@@ -102,8 +102,8 @@ $(function(){
 			$.post(department_update_api,data,function(result){
 				$("#progress-bar").modal("hide");
 				var msg = "";
-				if(typeof(result.error_code) != "undefined"){
-					msg = result.error_msg;
+				if(typeof(result.data.result_code) != "undefined"){
+					msg = result.data.result_msg;
 				}
 				else if(typeof(result.data.result_code) != "undefined" && parseInt(result.data.result_code) == 10000){
 					msg = result.data.result_msg;
@@ -141,8 +141,8 @@ $(function(){
 		$.post(assign_vaults_api,data,function(result){
 			$("#progress-bar").modal("hide");
 			var msg = "";
-			if(typeof(result.error_code) != "undefined"){
-				msg = result.error_msg;
+			if(typeof(result.data.result_code) != "undefined"){
+				msg = result.data.result_msg;
 			}
 			else if(typeof(result.data.result_code) != "undefined" && parseInt(result.data.result_code) == 10000){
 				msg = result.data.result_msg;
@@ -178,8 +178,8 @@ function init(url) {
 		data: {},
 		dataType: "JSON",
 		success: function (result) {
-			if(typeof(result.error_code) != "undefined"){
-				$("#department_list").html('<tr><td colspan="4" style="text-align:center;"><span style="color:red;">'+result.error_msg+'</span></td></tr>');
+			if(typeof(result.data.result_code) != "undefined"){
+				$("#department_list").html('<tr><td colspan="4" style="text-align:center;"><span style="color:red;">'+result.data.result_msg+'</span></td></tr>');
 			}
 			else if(typeof(result.data) != "undefined" && result.data){
 				var data = result.data;
@@ -256,8 +256,8 @@ function delete_department(dep_id) {
 			$.post(department_delete_api,data,function(result){
 				$("#progress-bar").modal("hide");
 				var msg = "";
-				if(typeof(result.error_code) != "undefined"){
-					msg = result.error_msg;
+				if(typeof(result.data.result_code) != "undefined"){
+					msg = result.data.result_msg;
 				}
 				else if(typeof(result.data.result_code) != "undefined" && parseInt(result.data.result_code) == 10000){
 					msg = result.data.result_msg;

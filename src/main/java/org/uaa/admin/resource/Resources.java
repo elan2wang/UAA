@@ -135,8 +135,8 @@ public class Resources extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getResourcesByAuth(@QueryParam("auth_id") Integer auth_id,
 			@QueryParam("start") Integer start, @QueryParam("itemsPerPage") Integer itemsPerPage) {
+		request = uriInfo.getRequestUri().toString();
 		if (auth_id == null || auth_id ==0) {
-			String request = uriInfo.getAbsolutePath().toString();
 			String error_msg = String.format(ConfigUtil.getValue("10010"), "auth_id");
 			ResponseWithStatus response = new ResponseWithStatus(request, "10010", error_msg);
 			return response.toJson();
@@ -160,6 +160,7 @@ public class Resources extends BaseResource {
 	@GET @Path("/view")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getResource(@QueryParam("res_id") Integer res_id) {
+		request = uriInfo.getRequestUri().toString();
 		Resource res = resourceService.queryResourceById(res_id);
 
 		if (res == null) {
@@ -178,6 +179,7 @@ public class Resources extends BaseResource {
 	public String addResource(@FormParam("res_uri") String res_uri, @FormParam("res_action") String res_action,
 			@FormParam("res_type") String res_type, @FormParam("res_description") String res_description,
 			@FormParam("mod_id") Integer mod_id) {
+		request = uriInfo.getRequestUri().toString();
 		Resource res = new Resource();
 		res.setRes_description(res_description);
 		res.setRes_action(res_action);
@@ -198,6 +200,7 @@ public class Resources extends BaseResource {
 	public String updateResource(@FormParam("res_id") Integer res_id, @FormParam("res_uri") String res_uri,
 			@FormParam("res_type") String res_type, @FormParam("res_description") String res_description,
 			@FormParam("mod_id") Integer mod_id) {
+		request = uriInfo.getRequestUri().toString();
 		Resource res = resourceService.queryResourceById(res_id);
 		if (res == null) {
 			String request = uriInfo.getAbsolutePath().toString();
@@ -237,6 +240,7 @@ public class Resources extends BaseResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public String switch_enable(@FormParam("res_id") Integer res_id, @FormParam("enable") Boolean enable) {
+		request = uriInfo.getRequestUri().toString();
 		Resource res = resourceService.queryResourceById(res_id);
 		if (res == null) {
 			String request = uriInfo.getAbsolutePath().toString();
