@@ -38,7 +38,7 @@ $(function(){
 				load_menu(data.modules);
 
 				//建立web socket连接
-				establish_socket(data.uid);
+				//establish_socket(data.uid);
 			} else if (typeof(result.error_code) != "undefined" && result.error_code == 10006) {
 				window.location.href = "/uaa/login.html";
 			}

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.uaa.common.AppContext;
+import org.uaa.security.exception.AccessDeniedException;
+import org.uaa.security.exception.AuthenticationException;
 
 /**
  * Servlet Filter implementation class SecurityControlFilter
@@ -84,7 +86,7 @@ public class SecurityControlFilter implements Filter {
 			
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
-		} catch (Exception e) {
+		} catch (AuthenticationException | AccessDeniedException e) {
 			exceptionHandler.handle(e, req, resp);
 		} finally {
 			loggerManager.logAfter(req);
