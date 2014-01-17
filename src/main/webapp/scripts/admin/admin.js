@@ -75,7 +75,7 @@ function change_password_submit() {
 			}
 		},
 		error: function(result) {
-			alert("密码修改请求提交失败!");
+			bootbox.alert("密码修改请求提交失败!");
 		}
 	});
 	
@@ -140,13 +140,13 @@ function add_profile_submit(obj) {
 		dataType: "JSON",
 		success: function(result) {
 			if (typeof(result.data.result_code) != "undefined") {
-				alert("档案信息添加成功");
+				bootbox.alert("档案信息添加成功");
 			} else if (typeof(result.data.result_code) != "undefined") {
-				alert(result.data.result_msg);
+				bootbox.alert(result.data.result_msg);
 			}
 		},
 		error: function(result) {
-			alert("请求提交失败");
+			bootbox.alert("请求提交失败");
 		}
 	});
 }
@@ -156,7 +156,6 @@ function add_profile_submit(obj) {
  */
 function edit_profile_submit(obj) {
 	var data = $(obj.form).serialize();
-	alert(data);
 	$.ajax({
 		url: update_profile_api,
 		type: "post",
@@ -164,13 +163,13 @@ function edit_profile_submit(obj) {
 		dataType: "JSON",
 		success: function(result) {
 			if (typeof(result.data.result_code) != "undefined") {
-				alert("档案信息修改成功");
+				bootbox.alert("档案信息修改成功");
 			} else if (typeof(result.data.result_code) != "undefined") {
-				alert(result.data.result_msg);
+				bootbox.alert(result.data.result_msg);
 			}
 		},
 		error: function(result) {
-			alert("请求提交失败");
+			bootbox.alert("请求提交失败");
 		}
 	});
 }

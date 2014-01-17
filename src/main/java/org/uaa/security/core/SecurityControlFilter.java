@@ -86,8 +86,10 @@ public class SecurityControlFilter implements Filter {
 			
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
-		} catch (AuthenticationException | AccessDeniedException e) {
+		} catch (AuthenticationException e) {
 			exceptionHandler.handle(e, req, resp);
+		} catch (AccessDeniedException e1) {
+			exceptionHandler.handle(e1, req, resp);
 		} finally {
 			loggerManager.logAfter(req);
 			SecurityContextHolder.removeSecurityContext();

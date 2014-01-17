@@ -33,7 +33,7 @@ $(function () {
                         	$.ajax({
                     			url: getRequestCount,
                     			type: "get",
-                    			data: {"interval": 10},
+                    			data: {"interval": 5},
                     			dataType: "JSON",
                     			success: function(result) {
                     				var x = (new Date()).getTime(), // current time
@@ -43,7 +43,7 @@ $(function () {
                     			}
                     		});
                             
-                        }, 10*1000);
+                        }, 5*1000);
                     }
                 }
             },
@@ -99,7 +99,7 @@ $(function () {
                         	$.ajax({
                     			url: getUniqueAddrCount,
                     			type: "get",
-                    			data: {"interval": 10},
+                    			data: {"interval": 5},
                     			dataType: "JSON",
                     			success: function(result) {
                     				var x = (new Date()).getTime(), // current time
@@ -109,7 +109,7 @@ $(function () {
                     			}
                     		});
                             
-                        }, 10*1000);
+                        }, 5*1000);
                     }
                 }
             },
