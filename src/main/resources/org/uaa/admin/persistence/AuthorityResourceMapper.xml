@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="queryResourcesByAuth" parameterType="java.util.Map" resultType="Resource">
-		SELECT * FROM a_Resource 
+		SELECT * FROM uaa_resource 
 		<where>
 			res_id IN (SELECT res_id FROM uaa_authorityResource WHERE auth_id = #{auth_id})
 		</where>

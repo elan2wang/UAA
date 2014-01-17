@@ -279,7 +279,7 @@ function mod_change(obj) {
 							resources += 'checked="checked" ';
 						}
 						resources += 'onclick="check(this)" ';
-						resources += 'style="margin: -1px 5px 0;">'+items[i].res_link+'</label>';
+						resources += 'style="margin: -1px 5px 0;">'+items[i].res_action+"@"+items[i].res_uri+'</label>';
 					}
 					$("#res_list").html(resources);
 				} else {

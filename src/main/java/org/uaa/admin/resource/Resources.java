@@ -16,6 +16,7 @@
 package org.uaa.admin.resource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,6 +148,7 @@ public class Resources extends BaseResource {
 		if (itemsPerPage != null) page.setItemsPerPage(itemsPerPage);
 
 		List<Resource> list = authorityResourceService.queryResourcesByAuth(auth_id, page);
+		
 		List<Map<String, Object>> resObjList = new ArrayList<Map<String, Object>>();
 		for (Resource res : list) resObjList.add(res.toMap());
 
