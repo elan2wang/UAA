@@ -241,7 +241,7 @@ function assign_res(auth_id, auth_name) {
 					resources += '<label class="task-bor" title="'+items[i].res_description+'">';
 					resources += '<input checked="checked" name="checked_res" type="checkbox" value="'+id+'" ';
 					resources += 'onclick="uncheck(this)" ';
-					resources += 'style="margin: -1px 5px 0;">'+items[i].res_link+'</label>';
+					resources += 'style="margin: -1px 5px 0;">'+items[i].res_action+"@"+items[i].res_uri+'</label>';
 				}
 				$("#selected_res_list").html(resources);
 			} else {
@@ -297,7 +297,11 @@ function check(obj) {
 		$(obj).attr("name", "checked_res");
 		$(obj).attr("onclick", "uncheck(this)");
 		var item = $(obj).parent();
-		$("#selected_res_list").append(item);
+		if ($("#selected_res_list").html() == no_data) {
+			$("#selected_res_list").html(item);
+		} else {
+			$("#selected_res_list").append(item);	
+		}
 	}
 }
 

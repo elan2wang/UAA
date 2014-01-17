@@ -200,7 +200,6 @@ function init(url) {
 						departments += '<td>'+items[i].address+'</td>';
 						departments += '<td><a class="edit" title="编辑部门" href="javascript:void(0);" onclick="edit_department('+items[i].dep_id+');return false;" ><i class="icon-pencil"></i></a>  ';
 						departments += '<a class="edit" title="删除部门" href="javascript:void(0);" onclick="delete_department('+items[i].dep_id+');return false;" ><i class="icon-trash"></i></a>  ';
-						departments += '<a class="edit config" title="分配账户" href="javascript:void(0);" onclick="assign_vaults('+items[i].dep_id+',\''+items[i].dep_name+'\');return false;" data-toggle="modal"><i class="icon-certificate"></i></a>';
 						departments += '</td></tr>';
 					}
 					$("#department_list").html(departments);
