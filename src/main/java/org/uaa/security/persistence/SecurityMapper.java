@@ -18,6 +18,7 @@ package org.uaa.security.persistence;
 import java.util.List;
 import java.util.Map;
 
+import org.uaa.admin.pojo.Apilog;
 import org.uaa.admin.pojo.Resource;
 import org.uaa.admin.pojo.User;
 
@@ -39,4 +40,8 @@ public interface SecurityMapper {
 	public List<Integer> queryNeededRoles(Map<String, Object> params);
 	
 	public void updateLastLoginInfo(Map<String, Object> params);
+	
+	public void insertLog(Apilog apilog);
+	
+	public void updateLog(Apilog apilog);
 }

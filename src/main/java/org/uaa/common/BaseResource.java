@@ -45,8 +45,8 @@ public class BaseResource {
 		StringBuilder previousLink = new StringBuilder();
 		StringBuilder nextLink = new StringBuilder();
 		String path = uriInfo.getPath();
-		previousLink.append("/bmp/1/"+path+"?");
-		nextLink.append("/bmp/1/"+path+"?");
+		previousLink.append("/uaa/1/"+path+"?");
+		nextLink.append("/uaa/1/"+path+"?");
 		Boolean exist_start = false;
 		Map queryParameters = uriInfo.getQueryParameters();
 		Iterator it = queryParameters.entrySet().iterator();

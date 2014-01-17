@@ -21,6 +21,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.uaa.common.ConfigUtil;
 import org.uaa.common.http.ResponseWithStatus;
@@ -32,8 +34,9 @@ import org.uaa.common.http.ResponseWithStatus;
  */
 @Component
 public class LogoutHandler {
-
-	private String logout_url = "/logout";
+	private static Logger log = LoggerFactory.getLogger(LogoutHandler.class);
+	
+	private String logout_url = "/1/logout";
 
 	public LogoutHandler() { }
 
@@ -43,6 +46,8 @@ public class LogoutHandler {
 		// clear Cookies
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
+			log.debug(cookie.getName());
+			
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}

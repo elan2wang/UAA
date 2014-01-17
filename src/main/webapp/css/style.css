@@ -608,10 +608,10 @@ ul.page-sidebar-menu > li > ul.sub-menu  li > ul.sub-menu > li > a > i {
 }
 
 .login .logo {
-  width: 280px;
+  width: 350px;
   margin: 0 auto;   
-  margin-top:50px;
-  padding: 15px;
+  margin-top:80px;
+  padding: 30px;
   text-align: center;
 }  
 

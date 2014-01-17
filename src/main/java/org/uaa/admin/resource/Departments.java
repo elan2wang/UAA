@@ -16,6 +16,7 @@
 package org.uaa.admin.resource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,9 +54,9 @@ public class Departments extends BaseResource{
 	private DepartmentService departmentService;
 	@Autowired
 	private UserDepartmentService userDepartmentService;
-	
+
 	private String request = "//////";
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String list(@QueryParam("start") Integer start,  @QueryParam("itemsPerPage") Integer itemsPerPage, 
@@ -66,7 +67,7 @@ public class Departments extends BaseResource{
 		params.put("page", page);
 		if (start != null) page.setStartIndex(start);
 		if (itemsPerPage != null) page.setItemsPerPage(itemsPerPage);
-		
+
 		// 获取数据
 		/* BEGIN 用于给用户分配部门时，默认选中已分配部门 */
 		List<Integer> depList = new ArrayList<Integer>();
@@ -94,12 +95,12 @@ public class Departments extends BaseResource{
 			/* END 用于给用户分配部门时，默认选中已分配部门 */
 			items.add(item);
 		}
-		
+
 		Map<String, Object> attrs = generateQueryResult(page, items);
 		ResponseWithData response = new ResponseWithData(attrs);
 		return response.toJson();
 	}
-	
+
 	@Path("/view") @GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getDepartment(@QueryParam("dep_id") Integer dep_id){
@@ -107,7 +108,7 @@ public class Departments extends BaseResource{
 		ResponseWithData response = new ResponseWithData(department.toMap());
 		return response.toJson();
 	}
-	
+
 	@Path("/add") @POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -118,7 +119,7 @@ public class Departments extends BaseResource{
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Add Department Successfully");
 		return response.toJson();
 	}
-	
+
 	@Path("/update") @POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -133,7 +134,7 @@ public class Departments extends BaseResource{
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Update Department Successfully");
 		return response.toJson();
 	}
-	
+
 	@Path("/destroy") @POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -142,31 +143,33 @@ public class Departments extends BaseResource{
 		ResponseWithStatus response = new ResponseWithStatus(request, "10000", "Delete Department Successfully");
 		return response.toJson();
 	}
-	
-	/*@Path("/all_department") @GET
+
+	@Path("/list") @GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getDepartmentsList(@QueryParam("dep_level") Integer dep_level, 
 			@QueryParam("dep_name") String dep_name, @QueryParam("start") Integer start, 
 			@QueryParam("itemsPerPage") Integer itemsPerPage){
-		Integer total = departmentService.getDepartmentsCountByCondition(dep_level, dep_name);
-		
-		Map attrs = new HashMap();
-		attrs.put("total", total);
-		ResponseWithData response = new ResponseWithData();
-		response.setAttrs(attrs);
-		return response.toJson();
-		
-		Page page = setPage(start, itemsPerPage, total);
-		List<Department> departmentList = departmentService.queryDepartmentsByCondition(dep_level, dep_name, page);
-		List list = new ArrayList<LinkedHashMap<String, Object>>();
-		for(Department department : departmentList){
-			Map<String, Object> item = department.toMap();
-			list.add(item);
+
+		// 获取查询参数
+		Map<String, Object> params = new HashMap<String, Object>();
+		Page page = new Page();
+		params.put("page", page);
+		if (start != null) page.setStartIndex(start);
+		if (itemsPerPage != null) page.setItemsPerPage(itemsPerPage);
+		if (dep_level != null) params.put("dep_level", dep_level);
+		if (dep_name != null) params.put("dep_name", dep_name);
+
+		// 获取数据
+		List<Department> deps = departmentService.queryDepartments(params);
+		List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+		for (Department dep : deps) {
+			items.add(dep.toMap());
 		}
-		Map<String, Object> map = generateQueryResult(page, list);
-		ResponseWithData response = new ResponseWithData(map);
+
+		// 生成返回数据
+		Map<String, Object> attrs = generateQueryResult(page, items);
+		ResponseWithData response = new ResponseWithData(attrs);
 		return response.toJson();
-		
-	}*/
+	}
 }
 

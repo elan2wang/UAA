@@ -52,4 +52,28 @@
 		WHERE username=#{username}
 	</update>
 
+	<insert id="insertLog" parameterType="Apilog">
+		INSERT INTO uaa_apilog
+		(res_uri, res_action, addr, request_time, client)
+		VALUES
+		(#{res_uri}, #{res_action}, #{addr}, #{request_time}, #{client})
+		<selectKey resultType="Integer" order="AFTER" keyProperty="log_id">
+			SELECT LAST_INSERT_ID() AS log_id
+		</selectKey>
+	</insert>
+	
+	<update id="updateLog" parameterType="Apilog">
+		UPDATE uaa_apilog
+		<set>
+			<if test="res_uri != null">res_uri = #{res_uri},</if>
+			<if test="res_action != null">res_action = #{res_action},</if>
+			<if test="addr != null">addr = #{addr},</if>
+			<if test="client != null">client = #{client},</if>
+			<if test="uid != null">uid = #{uid},</if>
+			<if test="request_time != null">request_time = #{request_time},</if>
+			<if test="response_time != null">response_time = #{response_time},</if>
+			<if test="time != null">time = #{time},</if>
+		</set>
+		WHERE log_id = #{log_id}
+	</update>
 </mapper>

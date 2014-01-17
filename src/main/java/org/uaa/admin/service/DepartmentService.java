@@ -37,14 +37,27 @@ public class DepartmentService extends BaseService {
 	@Autowired
 	private DepartmentMapper departmentMapper;
 	
+
+	public void addDepartment(Department department){
+		departmentMapper.addDepartment(department);
+	}
+	
+	public void updateDepartment(Department department){
+		departmentMapper.updateDepartment(department);
+	}
+	
+	public void deleteDepartment(Integer dep_id){
+		departmentMapper.deleteDepartment(dep_id);
+	}
+	
 	public Department queryDepartment(Integer dep_id) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("dep_id", dep_id);
 		return departmentMapper.queryDepartment(params);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<Department> queryDepartments(Map params) {
+	@SuppressWarnings({ "unchecked" })
+	public List<Department> queryDepartments(Map<String, Object> params) {
 		List<Department> list = departmentMapper.queryDepartments(params);
 		Page page = (Page) params.get("page");
 		if (page == null) {
@@ -59,33 +72,4 @@ public class DepartmentService extends BaseService {
 		return departmentMapper.queryDepartments(params);
 	}
 	
-	public List<Department> queryDepartmentsByCondition(Integer dep_level,
-			String dep_name, Page page){
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("dep_level", dep_level);
-		params.put("dep_name", dep_name);
-		params.put("startIndex", page.getStartIndex() - 1);
-		params.put("currentItemCount", page.getCurrentItemCount());
-		return departmentMapper.queryDepartmentsByCondition(params);
-	}
-	
-	public Integer getDepartmentsCountByCondition(Integer dep_level,
-			String dep_name){
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("dep_level", dep_level);
-		params.put("dep_name", dep_name);
-		return departmentMapper.getDepartmentsCountByCondition(params);
-	}
-	
-	public void addDepartment(Department department){
-		departmentMapper.addDepartment(department);
-	}
-	
-	public void updateDepartment(Department department){
-		departmentMapper.updateDepartment(department);
-	}
-	
-	public void deleteDepartment(Integer dep_id){
-		departmentMapper.deleteDepartment(dep_id);
-	}
 }
