@@ -15,9 +15,14 @@
  */
 package org.uaa.security.core;
 
+import java.sql.Timestamp;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.uaa.admin.pojo.Apilog;
+import org.uaa.security.SecurityService;
 
 /**
  * @author wangjian
@@ -26,12 +31,46 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LoggerManager {
-
+	
+	@Autowired
+	private SecurityService securityService;
+	
+	private Apilog log = null;
+	private String res_uri = null;
+	private Timestamp request_time = null;
+	private Timestamp response_time = null;
+	
 	public void logBefore(HttpServletRequest request) {
-		System.out.println("before server" );
+		res_uri = request.getPathInfo();
+		if (res_uri.startsWith("/logs")) return;
+		
+		String res_action = request.getMethod();
+		request_time = new Timestamp(System.currentTimeMillis());
+		String addr = request.getRemoteAddr();
+		String client = request.getHeader("User-Agent");
+		
+		log = new Apilog();
+		log.setAddr(addr);
+		log.setClient(client);
+		log.setRequest_time(request_time.getTime());
+		log.setRes_action(res_action);
+		log.setRes_uri(res_uri);
+		
+		securityService.insertLog(log);
 	}
 	
 	public void logAfter(HttpServletRequest request) {
-		System.out.println("after server" );
+		if (res_uri.startsWith("/logs")) return;
+		
+		response_time = new Timestamp(System.currentTimeMillis());
+		log.setResponse_time(response_time.getTime());
+		log.setTime(response_time.getTime()-request_time.getTime());
+		
+		if (SecurityContextHolder.getContext().getAuthenticationToken() != null) {
+			Integer uid = SecurityContextHolder.getContext().getAuthenticationToken().getUid();
+			log.setUid(uid);
+		}
+		
+		securityService.updateLog(log);
 	}
 }

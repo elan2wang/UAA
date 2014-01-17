@@ -9,24 +9,24 @@
 // APIs used by this script
 var department_list_api = "/uaa/1/departments";
 var role_list_api = "/uaa/1/roles";
-var account_list_api = "/uaa/1/accounts";
-var account_assign_dep_api = "/uaa/1/accounts/assign_dep";
-var account_assign_role_api = "/uaa/1/accounts/assign_role";
-var account_add_api = "/uaa/1/accounts/add";
-var account_update_api = "/uaa/1/accounts/update";
-var account_delete_api = "/uaa/1/accounts/delete";
-var account_switch_api = "/uaa/1/accounts/switch";
-var account_view_api = "/uaa/1/accounts/view";
-var account_reset_psd_api = "/uaa/1/accounts/reset";
+var user_list_api = "/uaa/1/users";
+var user_assign_dep_api = "/uaa/1/users/assign_dep";
+var user_assign_role_api = "/uaa/1/users/assign_role";
+var user_add_api = "/uaa/1/users/add";
+var user_update_api = "/uaa/1/users/update";
+var user_delete_api = "/uaa/1/users/delete";
+var user_switch_api = "/uaa/1/users/switch";
+var user_view_api = "/uaa/1/users/view";
+var user_reset_psd_api = "/uaa/1/users/reset";
 
 $(function(){
 	// 页面加载时触发，加载帐号列表
-	init(account_list_api);
+	init(user_list_api);
 
 	// 筛选
 	$("#btn_account_filter").click(function(){
 		var data = get_filter_data();
-		init(account_list_api+"?"+data);
+		init(user_list_api+"?"+data);
 	});
 	
 	//  点击新增帐号按钮时触发，加载部门列表
@@ -45,7 +45,7 @@ $(function(){
 		var password = md5("123456");
 		$("#progress-bar").modal("show");
 		$.ajax({
-			url: account_add_api,
+			url: user_add_api,
 			type: "post",
 			data: "username="+username+"&email="+email+"&mobile="+mobile+"&department="+
 				  department+"&password="+password,
@@ -67,16 +67,16 @@ $(function(){
 
 	// 编辑帐号确认时触发，更新帐号
 	$("#btn_account_edit_submit").click(function(){
-		var account_id = $("#account_id").val();
+		var user_id = $("#account_id").val();
 		var username = $("#account_name").val();
 		var email = $("#email").val();
 		var mobile = $("#mobile").val();
 		var department = $("#department").val();
 		$("#progress-bar").modal("show");
 		$.ajax({
-			url: account_update_api,
+			url: user_update_api,
 			type: "post",
-			data: "account_id="+account_id+"&username="+username+"&email="+email+"&mobile="
+			data: "user_id="+user_id+"&username="+username+"&email="+email+"&mobile="
 				  +mobile+"&department="+department,
 			dataType: "JSON",
 			success: function(result) {
@@ -101,11 +101,11 @@ $(function(){
 			roles += $(this).val()+",";
 		});
 		roles = roles.substr(0, roles.length-1);
-		var account_id = $("#account_id").val();
+		var user_id = $("#account_id").val();
 		$.ajax({
-			url: account_assign_role_api,
+			url: user_assign_role_api,
 			type: "post",
-			data: "account_id="+account_id+"&roles="+roles,
+			data: "user_id="+user_id+"&roles="+roles,
 			dataType: "JSON",
 			success: function(result) {
 				var result_code = result.data.result_code;
@@ -125,11 +125,11 @@ $(function(){
 			deps += $(this).val()+",";
 		});
 		deps = deps.substr(0, deps.length-1);
-		var account_id = $("#account_id").val();
+		var user_id = $("#account_id").val();
 		$.ajax({
-			url: account_assign_dep_api,
+			url: user_assign_dep_api,
 			type: "post",
-			data: "account_id="+account_id+"&deps="+deps,
+			data: "user_id="+user_id+"&deps="+deps,
 			dataType: "JSON",
 			success: function(result) {
 				var result_code = result.data.result_code;
@@ -263,9 +263,9 @@ function load_departments(tag_id, my_dep) {
  */
 function edit_account(id) {
 	$.ajax({
-		url: account_view_api,
+		url: user_view_api,
 		type: "get",
-		data: "account_id="+id,
+		data: "user_id="+id,
 		dataType: "JSON",
 		success: function(result) {
 			if(typeof(result.data.account_id) != "undefined"){
@@ -294,7 +294,7 @@ function view(id) {
 		$.ajax({
 			url: view_profile_api,
 			type: "get",
-			data: {account_id: id},
+			data: {user_id: id},
 			dataType: "JSON",
 			success: function(result) {
 				if (typeof(result.error_code) != "undefined") {
@@ -340,9 +340,9 @@ function delete_account(id) {
 	bootbox.confirm("您确定要删除该用户么?", function(result) {
 		if (result) {
 			$.ajax({
-				url: account_delete_api,
+				url: user_delete_api,
 				type: "post",
-				data: {account_id: id},
+				data: {user_id: id},
 				dataType: "JSON",
 				success: function(result) {
 					var result_code = result.data.result_code;
@@ -368,9 +368,9 @@ function reset_psd(id, username) {
 	bootbox.confirm("您确定要重置["+username+"]的密码么?", function(result) {
 		if (result) {
 			$.ajax({
-				url: account_reset_psd_api,
+				url: user_reset_psd_api,
 				type: "post",
-				data: {account_id: id},
+				data: {user_id: id},
 				dataType: "JSON",
 				success: function(result) {
 					var result_code = result.data.result_code;
@@ -393,9 +393,9 @@ function reset_psd(id, username) {
  */
 function switch_enable(id, enable) {
 	$.ajax({
-		url: account_switch_api,
+		url: user_switch_api,
 		type: "post",
-		data: "account_id="+id+"&enable="+enable,
+		data: "user_id="+id+"&enable="+enable,
 		dataType: "JSON",
 		success: function(result) {
 			var result_code = result.data.result_code;
@@ -420,7 +420,7 @@ function assing_role_dep(id, username) {
 	$.ajax({
 		url: role_list_api,
 		type: "get",
-		data: {account_id: id, itemsPerPage: 10000},
+		data: {user_id: id, itemsPerPage: 10000},
 		dataType: "JSON",
 		success: function(result) {
 			if(typeof(result.data.items) != "undefined" && result.data.items){
@@ -466,7 +466,7 @@ function assing_role_dep(id, username) {
 	$.ajax({
 		url: department_list_api,
 		type: "get",
-		data: {account_id: id, itemsPerPage: 10000},
+		data: {user_id: id, itemsPerPage: 10000},
 		dataType: "JSON",
 		success: function(result) {
 			if(typeof(result.data.items) != "undefined" && result.data.items){

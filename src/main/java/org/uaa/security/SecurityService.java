@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.uaa.admin.pojo.Apilog;
 import org.uaa.admin.pojo.Resource;
 import org.uaa.admin.pojo.User;
 import org.uaa.security.persistence.SecurityMapper;
@@ -71,5 +72,12 @@ public class SecurityService {
 		params.put("last_login_time", new Timestamp(System.currentTimeMillis()));
 		securityMapper.updateLastLoginInfo(params);
 	}
+	
+	public void insertLog(Apilog apilog) {
+		securityMapper.insertLog(apilog);
+	}
 
+	public void updateLog(Apilog apilog) {
+		securityMapper.updateLog(apilog);
+	}
 }

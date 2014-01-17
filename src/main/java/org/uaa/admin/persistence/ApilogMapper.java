@@ -15,26 +15,16 @@
  */
 package org.uaa.admin.persistence;
 
-import java.util.List;
 import java.util.Map;
-
-import org.uaa.admin.pojo.Department;
 
 /**
  * @author wangjian
- * @create 2014年1月16日 上午11:25:01
+ * @create 2014年1月17日 上午9:14:59
  *
  */
-public interface DepartmentMapper {
+public interface ApilogMapper {
 
-	public void addDepartment(Department department);
-
-	public void deleteDepartment(Integer dep_id);
-
-	public void updateDepartment(Department department);
-
-	public Department queryDepartment(Map<String, Object> params);
-
-	public List<Department> queryDepartments(Map<String, Object> params);
+	public Integer getRequestCount(Map<String, Object> params);
 	
+	public Integer getUniqueAddrCount(Map<String, Object> params);
 }

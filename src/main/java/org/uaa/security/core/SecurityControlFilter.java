@@ -68,6 +68,7 @@ public class SecurityControlFilter implements Filter {
 				tokenBeforeAuthenticated = loginHandler.handle(req);
 			} else if (logoutHandler.isLogout(req)) {
 				logoutHandler.handle(req, resp);
+				return;
 			} else {
 				tokenBeforeAuthenticated = authenticationManager.getToken(req);
 			}

@@ -3,40 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.uaa.admin.persistence.DepartmentMapper">
-
-	<select id="queryDepartment" parameterType="java.util.Map" resultType="Department">
-		SELECT * FROM uaa_department
-		<where>
-			<if test="dep_id != null">dep_id = #{dep_id}</if>
- 		</where>
-	</select>
-	
-	<select id="queryDepartments" parameterType="java.util.Map" resultType="Department">
-		SELECT * FROM uaa_department
-		<where>
-			<if test="dep_level != null">dep_level = #{dep_level}</if>
- 		</where>
-	</select>
-	
-	<select id="queryDepartmentsByCondition" parameterType="java.util.Map" resultType="Department">
-		SELECT * FROM uaa_department
-		<where>
-			<if test="dep_level != null">dep_level = #{dep_level}</if>
-			<if test="dep_name != null">AND dep_name LIKE '%${dep_name}%'</if>
- 		</where>
- 		<if test="startIndex != null and currentItemCount != null">
-			LIMIT #{startIndex}, #{currentItemCount}
-		</if>
-	</select>
-	
-	<select id="getDepartmentsCountByCondition" parameterType="java.util.Map" resultType="Integer">
-		SELECT COUNT(*) FROM uaa_department
-		<where>
-			<if test="dep_level != null">dep_level = #{dep_level}</if>
-			<if test="dep_name != null">AND dep_name LIKE '%${dep_name}%'</if>
- 		</where>
-	</select>
-	
 	<insert id="addDepartment"  parameterType="Department" useGeneratedKeys="true" keyProperty="dep_id">
 		INSERT INTO uaa_department
 		(dep_name, dep_level, address)
@@ -57,5 +23,20 @@
 	<delete id="deleteDepartment" parameterType="Integer">
 		DELETE FROM	uaa_department WHERE dep_id = #{dep_id}
 	</delete>
+	
+	<select id="queryDepartment" parameterType="java.util.Map" resultType="Department">
+		SELECT * FROM uaa_department
+		<where>
+			<if test="dep_id != null">dep_id = #{dep_id}</if>
+ 		</where>
+	</select>
+	
+	<select id="queryDepartments" parameterType="java.util.Map" resultType="Department">
+		SELECT * FROM uaa_department
+		<where>
+			<if test="dep_level != null">dep_level = #{dep_level}</if>
+			<if test="dep_name != null">AND dep_name LIKE '%${dep_name}%'</if>
+ 		</where>
+	</select>
 	
 </mapper>
