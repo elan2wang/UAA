@@ -5,8 +5,8 @@
  * 
  * this script is used by log_board.html
  */ 
-var getUniqueAddrCount = "/uaa/1/logs/addrs";
-var getRequestCount = "/uaa/1/logs/requests";
+var getUniqueAddrCount = "/1/logs/addrs";
+var getRequestCount = "/1/logs/requests";
 
 
 $(function () {
