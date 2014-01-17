@@ -7,13 +7,13 @@
  */ 
 
 // APIs used by this script
-var mod_tree_api = "/uaa/1/modules/tree";
-var mod_list_api = "/uaa/1/modules";
-var mod_view_api = "/uaa/1/modules/view";
-var mod_add_api = "/uaa/1/modules/add";
-var mod_update_api = "/uaa/1/modules/update";
-var mod_delete_api = "/uaa/1/modules/delete";
-var mod_switch_api = "/uaa/1/modules/switch";
+var mod_tree_api = "/1/modules/tree";
+var mod_list_api = "/1/modules";
+var mod_view_api = "/1/modules/view";
+var mod_add_api = "/1/modules/add";
+var mod_update_api = "/1/modules/update";
+var mod_delete_api = "/1/modules/delete";
+var mod_switch_api = "/1/modules/switch";
 
 $(function(){
 	//app.js的应用初始化

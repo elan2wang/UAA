@@ -7,13 +7,13 @@
  */ 
 
 // APIs used by this script
-var resource_list_api = "/uaa/1/resources";
-var resource_add_api = "/uaa/1/resources/add";
-var resource_update_api = "/uaa/1/resources/update";
-var resource_delete_api = "/uaa/1/resources/delete";
-var resource_switch_api = "/uaa/1/resources/switch";
-var resource_view_api = "/uaa/1/resources/view";
-var mod_list_api = "/uaa/1/modules";
+var resource_list_api = "/1/resources";
+var resource_add_api = "/1/resources/add";
+var resource_update_api = "/1/resources/update";
+var resource_delete_api = "/1/resources/delete";
+var resource_switch_api = "/1/resources/switch";
+var resource_view_api = "/1/resources/view";
+var mod_list_api = "/1/modules";
 
 $(function(){
 	// 页面加载时触发，加载资源列表

@@ -7,18 +7,18 @@
  */ 
 
 // APIs used by this script
-var change_password_api = "/uaa/1/users/password";
-var view_profile_api = "/uaa/1/profiles/view";
-var add_profile_api = "/uaa/1/profiles/add";
-var update_profile_api = "/uaa/1/profiles/update";
-var logout_api = "/uaa/1/logout";
+var change_password_api = "/1/users/password";
+var view_profile_api = "/1/profiles/view";
+var add_profile_api = "/1/profiles/add";
+var update_profile_api = "/1/profiles/update";
+var logout_api = "/1/logout";
 	
 /**
  * BEGIN 用户退出系统 ==========================================================================================
  */
 function logout() {
-	$.get("/uaa/1/logout",{},function(result){
-		window.location.href = "/uaa/login.html";
+	$.get("/1/logout",{},function(result){
+		window.location.href = "/login.html";
 	});
 }
 
@@ -30,7 +30,7 @@ function logout() {
  * 显示密码修改的面板
  */
 function change_password() {
-	$.get("/uaa/admin/repassd.html",{},function(result){
+	$.get("/admin/repassd.html",{},function(result){
 		$("#re_passowrd_panel").html(result);
 		$("#re_passowrd_panel").modal("show");
 	});
@@ -63,10 +63,10 @@ function change_password_submit() {
 					data: {},
 					dataType: "JSON",
 					success: function(result) {
-						window.location.href = "/uaa/login.html";
+						window.location.href = "/login.html";
 					},
 					error: function(result) {
-						window.location.href = "/uaa/login.html";
+						window.location.href = "/login.html";
 					}
 				});
 			} else if (typeof(result.data.result_code) != "undefined") {
@@ -94,7 +94,7 @@ function change_password_submit() {
  * 查看个人档案
  */
 function view_profile(uid) {
-	$.get("/uaa/admin/profile.html",{},function(result){
+	$.get("/admin/profile.html",{},function(result){
 		$("#profile_panel").html(result);
 		$.ajax({
 			url: view_profile_api,

@@ -7,15 +7,15 @@
  */ 
 
 // APIs used by this script
-var role_list_api = "/uaa/1/roles";
-var role_update_api = "/uaa/1/roles/update";
-var role_add_api = "/uaa/1/roles/add";
-var role_delete_api = "/uaa/1/roles/delete";
-var role_switch_api = "/uaa/1/roles/switch";
-var role_view_api = "/uaa/1/roles/view";
-var role_assign_auth_api = "/uaa/1/roles/assign_auth";
-var mod_tree_api = "/uaa/1/modules/tree";
-var auth_list_api = "/uaa/1/auths";
+var role_list_api = "/1/roles";
+var role_update_api = "/1/roles/update";
+var role_add_api = "/1/roles/add";
+var role_delete_api = "/1/roles/delete";
+var role_switch_api = "/1/roles/switch";
+var role_view_api = "/1/roles/view";
+var role_assign_auth_api = "/1/roles/assign_auth";
+var mod_tree_api = "/1/modules/tree";
+var auth_list_api = "/1/auths";
 
 $(function(){
 	// 页面加载时触发，加载角色列表

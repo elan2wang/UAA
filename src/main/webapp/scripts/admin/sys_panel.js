@@ -2,7 +2,7 @@ $(function(){
 	$("#btn_reload_security_meta_source").click(function(){
 		$("#progress-bar").modal("show");
 		$.ajax({
-			url: "/uaa/1/reload_security_meta_source",
+			url: "/1/reload_security_meta_source",
 			type: "get",
 			data: {},
 			dataType: "JSON",

@@ -7,17 +7,17 @@
  */ 
 
 // APIs used by this script
-var department_list_api = "/uaa/1/departments";
-var role_list_api = "/uaa/1/roles";
-var user_list_api = "/uaa/1/users";
-var user_assign_dep_api = "/uaa/1/users/assign_dep";
-var user_assign_role_api = "/uaa/1/users/assign_role";
-var user_add_api = "/uaa/1/users/add";
-var user_update_api = "/uaa/1/users/update";
-var user_delete_api = "/uaa/1/users/delete";
-var user_switch_api = "/uaa/1/users/switch";
-var user_view_api = "/uaa/1/users/view";
-var user_reset_psd_api = "/uaa/1/users/reset";
+var department_list_api = "/1/departments";
+var role_list_api = "/1/roles";
+var user_list_api = "/1/users";
+var user_assign_dep_api = "/1/users/assign_dep";
+var user_assign_role_api = "/1/users/assign_role";
+var user_add_api = "/1/users/add";
+var user_update_api = "/1/users/update";
+var user_delete_api = "/1/users/delete";
+var user_switch_api = "/1/users/switch";
+var user_view_api = "/1/users/view";
+var user_reset_psd_api = "/1/users/reset";
 
 $(function(){
 	// 页面加载时触发，加载帐号列表
@@ -289,7 +289,7 @@ function edit_user(id) {
  * @param id 帐号编号
  */
 function view(id) {
-	$.get("/uaa/admin/profile.html",{},function(result){
+	$.get("/admin/profile.html",{},function(result){
 		$("#profile_panel").html(result);
 		$.ajax({
 			url: view_profile_api,

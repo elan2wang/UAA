@@ -7,17 +7,17 @@
  */ 
 
 //APIs used by this script
-var auth_list_api = "/uaa/1/auths";
-var auth_add_api = "/uaa/1/auths/add";
-var auth_update_api = "/uaa/1/auths/update";
-var auth_delete_api = "/uaa/1/auths/delete";
-var auth_view_api = "/uaa/1/auths/view";
-var auth_switch_api = "/uaa/1/auths/switch";
-var auth_assign_res_api = "/uaa/1/auths/assign_res";
-var resource_list_api = "/uaa/1/resources";
-var resource_list_by_mod_api = "/uaa/1/resources/list_by_mod";
-var resource_list_by_auth_api = "/uaa/1/resources/list_by_auth";
-var mod_list_api = "/uaa/1/modules";
+var auth_list_api = "/1/auths";
+var auth_add_api = "/1/auths/add";
+var auth_update_api = "/1/auths/update";
+var auth_delete_api = "/1/auths/delete";
+var auth_view_api = "/1/auths/view";
+var auth_switch_api = "/1/auths/switch";
+var auth_assign_res_api = "/1/auths/assign_res";
+var resource_list_api = "/1/resources";
+var resource_list_by_mod_api = "/1/resources/list_by_mod";
+var resource_list_by_auth_api = "/1/resources/list_by_auth";
+var mod_list_api = "/1/modules";
 
 $(function(){
 	// 页面加载时触发，加载权限列表

@@ -54,7 +54,7 @@ function goLogin(){
 		var username = $("#username").val();
 		var password = md5($("#password").val());
 		$.ajax({
-			url:"/uaa/1/login",//登录接口
+			url:"/1/login",//登录接口
 			data:{username:username,password:password},
 			type:"post",
 			dataType: "json",
@@ -64,8 +64,8 @@ function goLogin(){
 					$(".res_msg").removeClass("hide");
 					$(".res_msg span").html(result.error_msg);
 				}
-				else if(typeof(result.data.result_code) != 'undefined' && parseInt(result.data.result_code) == "10000"){
-					window.location.href = "/uaa/index.html";
+				else if(typeof(result.data.result_code) != 'undefined' && result.data.result_code == "10000"){
+					window.location.href = "/index.html";
 				}
 				else{
 					$(".res_msg").removeClass("hide");

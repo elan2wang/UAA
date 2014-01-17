@@ -8,8 +8,8 @@
 
 
 // APIs used by this script
-var page_init_api = "/uaa/1/page_init";
-var tabs_init_api = "/uaa/1/tabs_init"; 
+var page_init_api = "/1/page_init";
+var tabs_init_api = "/1/tabs_init"; 
 
 /**
  * initialize the page
@@ -40,7 +40,7 @@ $(function(){
 				//建立web socket连接
 				//establish_socket(data.uid);
 			} else if (typeof(result.error_code) != "undefined" && result.error_code == 10006) {
-				window.location.href = "/uaa/login.html";
+				window.location.href = "/login.html";
 			}
 		}
 	});

@@ -8,13 +8,13 @@
 
 // APIs used by this script
 
-var department_add_api = "/uaa/1/departments/add";
-var department_update_api = "/uaa/1/departments/update";
-var department_view_api = "/uaa/1/departments/view";
-var department_delete_api = "/uaa/1/departments/destroy";
-var all_department_api = "/uaa/1/departments/list";
-var current_available_api= "/uaa/1/vaults/get_current_available_vaults_by_dep_id";
-var assign_vaults_api = "/uaa/1/departments/assign_vaults";
+var department_add_api = "/1/departments/add";
+var department_update_api = "/1/departments/update";
+var department_view_api = "/1/departments/view";
+var department_delete_api = "/1/departments/destroy";
+var all_department_api = "/1/departments/list";
+var current_available_api= "/1/vaults/get_current_available_vaults_by_dep_id";
+var assign_vaults_api = "/1/departments/assign_vaults";
 
 $(function(){
 	// 页面加载时触发，加载部门列表
