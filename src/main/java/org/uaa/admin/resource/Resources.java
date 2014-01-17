@@ -175,11 +175,12 @@ public class Resources extends BaseResource {
 	@POST @Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String addResource(@FormParam("res_uri") String res_uri,
+	public String addResource(@FormParam("res_uri") String res_uri, @FormParam("res_action") String res_action,
 			@FormParam("res_type") String res_type, @FormParam("res_description") String res_description,
 			@FormParam("mod_id") Integer mod_id) {
 		Resource res = new Resource();
 		res.setRes_description(res_description);
+		res.setRes_action(res_action);
 		res.setRes_enable(true);
 		res.setRes_uri(res_uri);
 		res.setRes_type(res_type);

@@ -133,10 +133,11 @@ public class Users extends BaseResource{
 		user.setUsername(username);
 		user.setPassword(psd);
 		user.setEmail(email);
-		user.setMobile(mobile);
+		user.setMobile(mobile); 
 		user.setDep_id(department);
 		user.setCreator(uid);
 		user.setUser_enable(true);
+		user.setUser_status("offline");
 		
 		userService.insertUser(user);
 		
