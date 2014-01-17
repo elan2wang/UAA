@@ -35,16 +35,17 @@ $(function(){
 	// 新增资源确认时触发，创建新资源
 	$("#btn_res_add_submit").click(function(){
 		$("#res_add_panel").modal("hide");
-		var res_link = $("#res_link").val();
+		var res_uri = $("#res_uri").val();
 		var res_type = $("#res_type").val();
+		var res_action = $("#res_action").val();
 		var res_description = $("#res_description").val();
 		var mod_id = $("#mod_id").val();
 		$("#progress-bar").modal("show");
 		$.ajax({
 			url: resource_add_api,
 			type: "post",
-			data: "res_link="+res_link+"&res_type="+res_type+"&res_description="
-				  +res_description+"&mod_id="+mod_id,
+			data: "res_uri="+res_uri+"&res_type="+res_type+"&res_action="+res_action
+					+"&res_description="+res_description+"&mod_id="+mod_id,
 			dataType: "JSON",
 			success: function(result) {
 				$("#progress-bar").modal("hide");
@@ -127,7 +128,8 @@ function init(url) {
 					for (var i=0; i<items.length; i++) {
 						var id = items[i].res_id;
 						resources += '<tr><td>'+(i+1)+'</td>';
-						resources += '<td>'+items[i].res_link+'</td>';
+						resources += '<td>'+items[i].res_uri+'</td>';
+						resources += '<td>'+items[i].res_action+'</td>';
 						resources += '<td>'+items[i].res_type+'</td>';
 						resources += '<td>'+items[i].res_description+'</td>';
 						var state, op_info, enable;

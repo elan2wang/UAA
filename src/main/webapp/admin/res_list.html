@@ -33,6 +33,7 @@
 					<tr>
 						<th>#</th>
 						<th>资源链接</th>
+						<th>方法</th>
 						<th>类型</th>
 						<th>描述</th>
 						<th>状态</th>
@@ -65,8 +66,19 @@
 		<div class="control-group">
 			<div class="controls1">
 				<label class="fl mr10 text-right input-smal">资源链接</label> <input
-					id="res_link" name="res_link" class="input-middle" type="text"
+					id="res_uri" name="res_uri" class="input-middle" type="text"
 					size="16" value="">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls1">
+				<label class="fl mr10 text-right input-smal">资源方法</label> <select
+					id="res_action" name="res_action" class="input-lar">
+					<option value="POST">POST</option>
+					<option value="GET">GET</option>
+					<option value="PUT">PUT</option>
+					<option value="DELETE">DELETE</option>
+				</select>
 			</div>
 		</div>
 		<div class="control-group">
