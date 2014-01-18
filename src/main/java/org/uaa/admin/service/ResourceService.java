@@ -15,10 +15,6 @@
  */
 package org.uaa.admin.service;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.uaa.admin.persistence.ResourceMapper;
 import org.uaa.admin.pojo.Resource;
-import org.uaa.admin.raml.RamlParser;
 import org.uaa.common.BaseService;
 import org.uaa.common.Page;
 
@@ -73,7 +68,7 @@ public class ResourceService extends BaseService {
 		return paging(list, page);
 	}
 
-	public void loadResourcesFromRaml(Reader reader) throws IOException {
+	/*public void loadResourcesFromRaml(Reader reader) throws IOException {
 		List<org.uaa.admin.pojo.Resource> list = new ArrayList<org.uaa.admin.pojo.Resource>();
 		List<org.raml.model.Resource> resources = RamlParser.getResources(reader);
 		for (org.raml.model.Resource res : resources) {
@@ -87,6 +82,6 @@ public class ResourceService extends BaseService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("resourceList", list);
 		resourceMapper.insertResourceBatch(params);
-	}
+	}*/
 
 }

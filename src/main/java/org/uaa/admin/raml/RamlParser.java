@@ -15,30 +15,13 @@
  */
 package org.uaa.admin.raml;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.raml.model.Action;
-import org.raml.model.ActionType;
-import org.raml.model.Raml;
-import org.raml.model.Resource;
-import org.raml.parser.visitor.RamlDocumentBuilder;
-
 /**
  * @author wangjian
  * @create 2014年1月9日 下午12:11:16
  *
  */
 public class RamlParser {
-	public static List<Resource> getResources(Reader reader) throws IOException {
+	/*public static List<Resource> getResources(Reader reader) throws IOException {
 		List<Resource> list = new ArrayList<Resource>();
 		
 		Raml raml = new RamlDocumentBuilder().build(reader);
@@ -89,4 +72,4 @@ public class RamlParser {
 			e.printStackTrace();
 		}
 	}
-}
+*/}

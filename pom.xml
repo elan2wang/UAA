@@ -138,15 +138,16 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.raml</groupId>
-			<artifactId>raml-parser</artifactId>
-			<version>0.9-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20090211</version>
 		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.raml</groupId>
+			<artifactId>raml-parser</artifactId>
+			<version>0.9-SNAPSHOT</version>
+		</dependency> -->
 	</dependencies>
 
 
@@ -198,7 +199,7 @@
 				<configuration>
 					<encoding>UTF-8</encoding>
 					<webApp>
-						<contextPath>/${project.artifactId}</contextPath>
+						<contextPath>/</contextPath>
 					</webApp>
 				</configuration>
 			</plugin>
