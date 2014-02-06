@@ -15,6 +15,7 @@
  */
 package org.uaa.admin.resource;
 
+import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -36,31 +37,37 @@ import org.uaa.common.http.ResponseWithData;
 @Path("/logs")
 @Controller
 public class Apilogs extends BaseResource{
-	
+
+	private final static Integer default_interval = 10;
 	@Autowired
 	private ApilogService apilogService;
-	
+
 	@Path("/addrs") @GET
 	public String getUniqueAddrCount(@QueryParam("interval") Integer interval) {
-		if (interval == null) interval = 30;
-		Integer count = apilogService.getUniqueAddrCount(interval);
-		
+		if (interval == null) interval = default_interval;
+
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		Integer count = apilogService.getUniqueAddrCount(interval, now.getTime());
+
 		Map<String, Object> attrs = new LinkedHashMap<String, Object>();
 		attrs.put("count", count);
-		
+
 		ResponseWithData res = new ResponseWithData(attrs);
 		return res.toJson();
 	}
-	
+
 	@Path("/requests") @GET
 	public String getRequestCount(@QueryParam("interval") Integer interval) {
-		if (interval == null) interval = 30;
-		Integer count = apilogService.getRequestCount(interval);
-		
+		if (interval == null) interval = default_interval;
+
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		Integer count = apilogService.getRequestCount(interval, now.getTime());
+
 		Map<String, Object> attrs = new LinkedHashMap<String, Object>();
 		attrs.put("count", count);
-		
+
 		ResponseWithData res = new ResponseWithData(attrs);
 		return res.toJson();
 	}
+
 }

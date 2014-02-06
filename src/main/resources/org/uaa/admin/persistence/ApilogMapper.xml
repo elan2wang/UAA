@@ -8,7 +8,7 @@
 	<select id="getRequestCount" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(DISTINCT log_id) FROM uaa_apilog
 		<where>
-			<![CDATA[ #{current_time} - request_time <= #{interval}*1000 ]]>
+			<![CDATA[ #{end_time} - request_time <= #{interval}*1000 ]]>
 		</where>
 	</select>
 
@@ -22,7 +22,7 @@
   				</foreach>
   				AND
 			</if>
-			<![CDATA[ #{current_time} - request_time <= #{interval}*1000 ]]>
+			<![CDATA[ #{end_time} - request_time <= #{interval}*1000 ]]>
 		</where>
 	</select>
 

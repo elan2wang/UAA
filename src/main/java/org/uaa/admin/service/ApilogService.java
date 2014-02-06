@@ -15,7 +15,6 @@
  */
 package org.uaa.admin.service;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,19 +33,17 @@ public class ApilogService {
 	@Autowired
 	private ApilogMapper apilogMapper;
 	
-	public Integer getRequestCount(Integer interval) {
-		Timestamp now = new Timestamp(System.currentTimeMillis());
+	public Integer getRequestCount(Integer interval, Long end_time) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("interval", interval);
-		params.put("current_time", now.getTime());
+		params.put("end_time", end_time);
 		return apilogMapper.getRequestCount(params);
 	}
 
-	public Integer getUniqueAddrCount(Integer interval) {
-		Timestamp now = new Timestamp(System.currentTimeMillis());
+	public Integer getUniqueAddrCount(Integer interval, Long end_time) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("interval", interval);
-		params.put("current_time", now.getTime());
+		params.put("end_time", end_time);
 		return apilogMapper.getUniqueAddrCount(params);
 	}
 
