@@ -78,12 +78,10 @@ public class SecurityControlFilter implements Filter {
 			UsernamePasswordToken tokenAfterAuthenticated = authenticationManager.authenticate(tokenBeforeAuthenticated, holder);
 			
 			authorizationManager.decide(tokenAfterAuthenticated, req);	
-			
 			// set securityContext
 			SecurityContext context = new SecurityContext();
 			context.setAuthenticationToken(tokenAfterAuthenticated);
 			SecurityContextHolder.addSecurityContext(context);
-			
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		} catch (AuthenticationException e) {

@@ -29,7 +29,6 @@ public class ResponseWithData implements Response{
 	}
 	
 	public String toJson() {
-		System.out.println("nihao");
 		String res = null;
 		Map<String, Object> attributes = new LinkedHashMap<String, Object>();
 		attributes.put("apiVersion", apiVersion);

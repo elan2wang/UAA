@@ -18,11 +18,17 @@
 						<option value="false">已禁用</option>
 					</select> <select id="filter_res_type" class="input-small">
 						<option value="">所有类型</option>
-						<option value="private">受限资源</option>
-						<option value="sysadmin">管理资源</option>
-						<option value="public">公共资源</option>
+						<option value="public">public</option>
+						<option value="private">private</option>
+						<option value="sysadmin">sysadmin</option>
+					</select> <select id="filter_res_action" class="input-small">
+						<option value="">所有方法</option>
+						<option value="GET">GET</option>
+						<option value="POST">POST</option>
+						<option value="PUT">PUT</option>
+						<option value="DELETE">DELETE</option>
 					</select> <input type="text" class="input-small" placeholder="资源名"
-						id="filter_res_link">
+						id="filter_res_uri">
 					<button type="submit" class="btn btn-success" id="btn_res_filter">
 						<i class="icon-filter"></i> 筛选
 					</button>
@@ -74,8 +80,8 @@
 			<div class="controls1">
 				<label class="fl mr10 text-right input-smal">资源方法</label> <select
 					id="res_action" name="res_action" class="input-lar">
-					<option value="POST">POST</option>
 					<option value="GET">GET</option>
+					<option value="POST">POST</option>
 					<option value="PUT">PUT</option>
 					<option value="DELETE">DELETE</option>
 				</select>
@@ -85,9 +91,9 @@
 			<div class="controls1">
 				<label class="fl mr10 text-right input-smal">资源类型</label> <select
 					id="res_type" name="res_type" class="input-lar">
-					<option value="private">受限资源</option>
-					<option value="sysadmin">管理资源</option>
-					<option value="public">公共资源</option>
+					<option value="public">public</option>
+					<option value="private">private</option>
+					<option value="sysadmin">sysadmin</option>
 				</select>
 			</div>
 		</div>

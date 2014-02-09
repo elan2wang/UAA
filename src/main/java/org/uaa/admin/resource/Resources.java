@@ -63,8 +63,9 @@ public class Resources extends BaseResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String list(@QueryParam("mod_id") Integer mod_id, @QueryParam("res_enable") Boolean res_enable,
+	public String list(@QueryParam("mod_id") Integer mod_id,
 			@QueryParam("res_type") String res_type, @QueryParam("res_uri") String res_uri,
+			@QueryParam("res_action") String res_action, @QueryParam("res_enable") Boolean res_enable,
 			@QueryParam("start") Integer start, @QueryParam("itemsPerPage") Integer itemsPerPage) {
 		// 获取参数
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
@@ -75,6 +76,7 @@ public class Resources extends BaseResource {
 		if (res_enable != null) params.put("res_enable", res_enable);
 		if (mod_id != null && mod_id != 0) params.put("mod_id", mod_id);
 		if (res_type != null && !res_type.equals("")) params.put("res_type", res_type);
+		if (res_action != null && !res_action.equals("")) params.put("res_action", res_action);
 		if (res_uri != null && !res_uri.equals("")) params.put("res_uri", res_uri);
 
 		// 获取数据		

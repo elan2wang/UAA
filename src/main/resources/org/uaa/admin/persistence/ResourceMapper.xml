@@ -43,7 +43,7 @@
 		<where>
 			<if test="mod_id != null">AND mod_id = #{mod_id}</if>
 			<if test="res_type != null">AND res_type = #{res_type}</if>
-			<if test="res_type != null">AND res_action = #{res_action}</if>
+			<if test="res_action != null">AND res_action = #{res_action}</if>
 			<if test="res_uri != null">AND res_uri LIKE '%${res_uri}%'</if>
 			<if test="res_enable != null">AND res_enable = #{res_enable}</if>
 		</where>

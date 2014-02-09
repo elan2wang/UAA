@@ -27,8 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.uaa.common.ConfigUtil;
+import org.uaa.common.Crypto;
 import org.uaa.common.json.JsonFactory;
-import org.uaa.security.crypto.Crypto;
 
 /**
  * @author wangjian

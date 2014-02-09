@@ -49,7 +49,7 @@ $(function(){
 			dataType: "JSON",
 			success: function(result) {
 				$("#progress-bar").modal("hide");
-				if(typeof(result.data.res_id) != "undefined") {
+				if(typeof(result.data.result_code) != "undefined") {
 					bootbox.alert(result.data.result_msg);
 					// 刷新列表
 					refresh_tab();
@@ -58,11 +58,11 @@ $(function(){
 		});
 	});
 	
-	// 新增资源确认时触发，创建新资源
+	// 修改资源确认时触发，修改资源
 	$("#btn_res_edit_submit").click(function(){
 		$("#res_add_panel").modal("hide");
 		var res_id = $("#res_id").val();
-		var res_link = $("#res_link").val();
+		var res_uri = $("#res_uri").val();
 		var res_type = $("#res_type").val();
 		var res_description = $("#res_description").val();
 		var mod_id = $("#mod_id").val();
@@ -70,12 +70,12 @@ $(function(){
 		$.ajax({
 			url: resource_update_api,
 			type: "post",
-			data: "res_link="+res_link+"&res_type="+res_type+"&res_description="
+			data: "res_uri="+res_uri+"&res_type="+res_type+"&res_description="
 				  +res_description+"&mod_id="+mod_id+"&res_id="+res_id,
 			dataType: "JSON",
 			success: function(result) {
 				$("#progress-bar").modal("hide");
-				if(typeof(result.data.res_id) != "undefined") {
+				if(typeof(result.data.result_code) != "undefined") {
 					bootbox.alert(result.data.result_msg);
 					// 刷新列表
 					refresh_tab();
@@ -93,8 +93,11 @@ function get_filter_data() {
 	if ($("#filter_res_type").val() != "") {
 		data += "&res_type="+$("#filter_res_type").val();
 	}
-	if ($("#filter_res_link").val() != "") {
-		data += "&res_link="+$("#filter_res_link").val();
+	if ($("#filter_res_uri").val() != "") {
+		data += "&res_uri="+$("#filter_res_uri").val();
+	}
+	if ($("#filter_res_action").val() != "") {
+		data += "&res_action="+$("#filter_res_action").val();
 	}
 	if (data.length > 0) {
 		data = data.substring(1, data.length);
@@ -225,7 +228,8 @@ function edit_res(id) {
 				$("#btn_res_add_submit").addClass("hide");
 				var res = result.data;
 				$("#res_id").val(res.res_id);
-				$("#res_link").val(res.res_link);
+				$("#res_uri").val(res.res_uri);
+				$('#res_action').val(res.res_action);
 				$("#res_type").val(res.res_type);
 				$("#res_description").val(res.res_description);
 				load_modules(1, res.mod_id);

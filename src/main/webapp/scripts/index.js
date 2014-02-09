@@ -7,7 +7,7 @@
  */ 
 
 
-// APIs used by this script
+//APIs used by this script
 var page_init_api = "/1/page_init";
 var tabs_init_api = "/1/tabs_init"; 
 
@@ -21,26 +21,23 @@ $(function(){
 		data:{},
 		dataType:"JSON",
 		success:function(result){
-			if (result && typeof(result.data) != "undefined") {
-				var data = result.data;
+			var data = result.data;
+			if (typeof(data.result_code) != "undefined") {
+				window.location.href = "/login.html";
+			} else if (typeof(data.uid) != "undefined") {
+				//设置隐藏的用户ID
+				$("#uid").html(data.uid);
 
 				//设置顶部导航用户名
 				if(data.name.length > 0){
 					$("#username").html(data.name);
 				}
-				//设置隐藏的用户ID
-				$("#uid").html(data.uid);
-
-				//设置隐藏的用户角色信息
-
 
 				//加载导航栏菜单
 				load_menu(data.modules);
 
 				//建立web socket连接
 				//establish_socket(data.uid);
-			} else if (typeof(result.error_code) != "undefined" && result.error_code == 10006) {
-				window.location.href = "/login.html";
 			}
 		}
 	});
@@ -167,7 +164,7 @@ function load_tab_page(mod_id, mod_link) {
  */
 function go_to_msg_list(type) {
 	var msg_mod_id = parseInt($("#msg_mod_id").html());
-	
+
 	$("#main_menu").find("li").removeClass("active");
 	$("#menu"+msg_mod_id).addClass("active");
 
