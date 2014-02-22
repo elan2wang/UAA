@@ -13,3 +13,5 @@ layout: index
 **前段技术**： Bootstrap2.3
 
 ##功能描述
+
+![db-er](images/db-er.png)
