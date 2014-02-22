@@ -3,15 +3,15 @@ layout: index
 
 ---
 
-##技术架构
-本系统是基于角色的访问控制和管理系统，适用于基于Restful API的web服务。
+##Technique Details
+UAA is a role based access control and management system which is applied to systems using RESTful API.
 
 **Server**： mysql + jetty/tomcat
 
-**后端技术**： Servlet3.0 ＋ Jersey + Spring3.2.3 + mybatis
+**Backend**： Servlet3.0 ＋ Jersey + Spring3.2.3 + mybatis
 
-**前段技术**： Bootstrap2.3
+**Frontend**： Bootstrap2.3
 
-##功能描述
+##Function Details
 
 ![db-er](images/db-er.png)
